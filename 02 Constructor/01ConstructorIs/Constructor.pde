@@ -8,11 +8,14 @@ void setup() {
   Ball myBall = new Ball(); // Line = 1/2 of constructor
   int startX = displayWidth*1/2;
   int startY = displayHeight*1/2;
-  int referentMeasures = ( displayWidth<displayHeight) ? displayWidth : displayHeight ; //review ternary operator
+  int referentMeasure = ( displayWidth<displayHeight) ? displayWidth : displayHeight ; //review ternary operator
   myBall.x = startX; //span myBall in middle of display
-  myBall.y = startY; \
-  myBall.diameter = 
+  myBall.y = startY; 
+  myBall.diameter = referentMeasure*1/20;
+  myBall.colour = color ( random(255), random(255), random(255)) ; //random(), shortcut, casting from float to intin color var
+  //fill(myBall.colour); //caution: must reset defaults
   //ellipse(x, y, diameter, diameter); //ball
+  //fill(0); //Reset to grayscale; 0 to 255 in shades of gray
   //What if?
   //Ball yourBall = newBall();
   //yourBall.x =
