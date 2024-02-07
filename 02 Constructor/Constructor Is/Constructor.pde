@@ -5,8 +5,7 @@ void setup() {
   //ScreenSizeChecker for landscape, portrait, square views
   //Updated automatically for screen rotation on android
   // An object is... see the CLASS
-  Ball myBall = new Ball();
-  Ball yourBall = new Ball();
+  Ball myBall = new Ball(); // Line = 1/2 of consructor
   //ellipse(x, y, diameter, diameter); //ball
 } //end setup
 //

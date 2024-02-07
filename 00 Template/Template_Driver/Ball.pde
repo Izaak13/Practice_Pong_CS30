@@ -4,4 +4,4 @@ class Ball
   float x, y, diameter;
   color colour;
   //
-} //end BALL
+} //end Ball
