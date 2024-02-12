@@ -1,5 +1,8 @@
 //global variables and objects
 Ball myBall; // Both 1/2's of constructor
+//Ball yourBall
+//
+color pongTableColour = 255; //ERROR: move to table CLASS, 255 is full Blue
 //
 void setup() {
   size(600, 400); //fullscreen(); displayWidth; displayHeight
@@ -10,7 +13,8 @@ void setup() {
   // yourBall = new Ball();
 } //end setup
 //
-void draw() {
+void draw() { 
+  background(pongTableColour); //Night mode is known in CLASS, not DRIVER
   myBall.draw();
 } //end draw
 //
