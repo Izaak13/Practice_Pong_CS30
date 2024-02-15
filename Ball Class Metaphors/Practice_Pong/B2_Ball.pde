@@ -6,7 +6,7 @@ class Ball
   //Global variables (of class)
   float x, y, diameter;
   color colour;
-  float xSpeed, ySpeed, xDirection, yDirection;
+  float xSpeed, ySpeed, xDirection, yDirection, xSpeedChange=1.0, ySpeedChange=1.0;
   float gravity=0.0;
   //static int count = 25; //Static number for amount of ball instances in a firework
   //
@@ -19,7 +19,6 @@ class Ball
     int referentMeasure = ( width<height) ? width : height ; //review ternary operator
     //
     //Object variables
-    
     this.x = startX; //span myBall in middle of display
     this.y = startY; 
     this.diameter = referentMeasure*1/20;
@@ -28,20 +27,42 @@ class Ball
     this.ySpeed = yDirection();
     xDirection = -1; //float, truncated, must be minimum 2
     yDirection = -1;
+    this.xSpeedChange = 1.0;
+    this.ySpeedChange = 1.0;
   }//End Ball Constructor
   //
   //Firework constructor
-  Ball (float gravityParameter) {
+  Ball (float xParameter, float yParameter, float gravityParameter) {
     //Ball(); //Place holder
-    x = mouseX; //ERROR: trigger when ball enters goal
-    y = mouseY; //ERROR: trigger when ball enters goal
-    colour = color ( random(255), random(255), random(255)) ;
-    diameter = random(1/20*width);
-    xSpeed = random(-5, 5);
-    ySpeed = random(-5, 5);
+    this.x = xParameter; //ERROR: trigger when ball enters goal
+    this.y = yParameter; //ERROR: trigger when ball enters goal
+    this.colour = color ( random(255), random(255), random(255)) ;
+    this.diameter = random(width*1/25);
+    this.xSpeed = random(-5, 5);
+    this.ySpeed = random(-5, 5);
     gravity = gravityParameter; //gloabl variable = local variable
     
   } //End firework
+  //
+  //overloaded constructor, moved ball constructor
+  //must look like old Ball instance, and make old ball instance disappear
+  Ball(float xParameter, yParameter, float diameterParameter, float colourParameter) {
+    this.x = xParameter; //spawn myBall in middle of the display
+    this.y = yParameter;
+    this.diameter = diameterParameter;
+    this.colour = colourParameter;
+    //
+    //
+    this.xSpeed = xDirection(); // float, could be any number
+    this.ySpeed = yDirection();
+    xDirection = -1; //float, truncated, must be minimum 2
+    yDirection = -1;
+    this.xSpeedChange = 1.0;
+    this.ySpeedChange = 1.0;
+    //
+    //
+  } //End movedBall constructor
+  //
   float xDirection() {
     float xDirection = int ( random(-10, 10) );
     while (xDirection > -5 && xDirection < 5) {
@@ -61,13 +82,13 @@ class Ball
     ellipse(x, y, diameter, diameter); //Easter egg: at bounce, diameters changes
     fill(0);
     //
-    step();
-  }//End draw
+    step(); //manipulating the variables
+  } //End draw
   void step() {
     bounce();
-    ySpeed += gravity;
-    x += xSpeed; //x = x + xSpeed
-    y += ySpeed;
+    ySpeed += gravity; //ball() is not affected, gravity is zero for it
+    x += xSpeed * xSpeedChange; //x = x + xSpeed
+    y += ySpeed * ySpeedChange;
   } //End step
   void bounce() {
     if ( x < 0+(diameter*1/2) || x > width-(diameter*1/2) ) xSpeed *= xDirection; //Repetition is *-1

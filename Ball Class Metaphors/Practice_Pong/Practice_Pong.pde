@@ -1,8 +1,9 @@
 //global variables and objects
 Ball myBall; // Both 1/2's of constructor
 Ball[] fireworks = new Ball[25];
+Ball movedBall;
 //
-color pongTableColour = 255; //ERROR: move to table CLASS, 255 is full Blue
+color pongTableColour = #171CFA; //ERROR: move to table CLASS, 255 is full Blue
 //
 void setup() {
   size(600, 400); //fullscreen(); displayWidth; displayHeight
@@ -10,7 +11,11 @@ void setup() {
   //Updated automatically for screen rotation on android
   // Population
   myBall = new Ball();
-  // yourBall = new Ball();
+  for (int i=0; i < fireworks.length; i++) {
+    fireworks[i] = new Ball( width*-1, height*-1, 0.5 );
+  }
+  movedBall = new Ball(width*-1, height*-1);
+  //
 } //end setup
 //
 void draw() { 
@@ -19,15 +24,17 @@ void draw() {
   for (int i=0; i < fireworks.length; i++) {
     fireworks[i].draw();
   }
-  println(myBall.xSpeed, myBall.ySpeed);
+  println(fireworks[0].y);
+  movedBall.draw();
 } //end draw
 //
 void keyPressed() {} //end keyPressed
 //
 void mousePressed() {
   for (int i=0; i < fireworks.length; i++) {
-    fireworks[i] = new Ball(0.5);
+    fireworks[i] = new Ball(mouseX, mouseY, 0.5);
   }
+  movedBall = new Ball(mouseX, mouseY, myBall.diameter, myBall.colour);
 } //end mousePressed
 //
 void ballCollisions() {
