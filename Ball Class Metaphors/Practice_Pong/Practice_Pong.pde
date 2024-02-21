@@ -4,6 +4,7 @@ Ball[] fireworks = new Ball[25];
 Ball movedBall;
 //
 color pongTableColour = #171CFA; //ERROR: move to table CLASS, 255 is full Blue
+boolean speedNerf = true;
 //
 void setup() {
   size(600, 400); //fullscreen(); displayWidth; displayHeight
@@ -14,13 +15,21 @@ void setup() {
   for (int i=0; i < fireworks.length; i++) {
     fireworks[i] = new Ball( width*-1, height*-1, 0.5 );
   }
-  movedBall = new Ball(width*-1, height*-1);
+  movedBall = new Ball(width*-1, height*-1, myBall.diameter, myBall.colour, myBall.xSpeed, myBall.ySpeed);
   //
 } //end setup
 //
 void draw() { 
   background(pongTableColour); //Night mode is known in CLASS, not DRIVER
-  myBall.draw();
+  if (speedNerf==true && myBall.xSpeed > 9) {
+    myBall.xSpeed/=1.25;
+  }
+  if ( myBall.disappear == true ) {
+    //EMPTY IF
+    //myBall.step(); //Keeps active the variables but not .draw
+  } else {
+    myBall.draw();
+  }
   for (int i=0; i < fireworks.length; i++) {
     fireworks[i].draw();
   }
@@ -28,13 +37,21 @@ void draw() {
   movedBall.draw();
 } //end draw
 //
-void keyPressed() {} //end keyPressed
+void keyPressed() {
+  if (key=='h' || key=='H' && myBall.xSpeed < 15) {
+    myBall.xSpeed*=1.25;
+  }
+  speedNerf=false;
+} //end keyPressed
 //
+void keyReleased() {
+  speedNerf=true;
+} //end KeyReleased
 void mousePressed() {
   for (int i=0; i < fireworks.length; i++) {
     fireworks[i] = new Ball(mouseX, mouseY, 0.5);
   }
-  movedBall = new Ball(mouseX, mouseY, myBall.diameter, myBall.colour);
+  movedBall = new Ball(mouseX, mouseY, myBall.diameter, myBall.colour, myBall.xSpeed, myBall.ySpeed);
 } //end mousePressed
 //
 void ballCollisions() {
