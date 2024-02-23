@@ -5,6 +5,7 @@ Ball movedBall;
 //
 color pongTableColour = #171CFA; //ERROR: move to table CLASS, 255 is full Blue
 boolean speedNerf = true;
+boolean explosion = true;
 //
 void setup() {
   size(600, 400); //fullscreen(); displayWidth; displayHeight
@@ -32,10 +33,17 @@ void draw() {
   }
   //Trigger: left goal, right goal
   //ERROR: ball instance still bounces
-  if (myBall.x < (2*myBall.diameter) || myBall.x > ( width-(2*myBall.diameter)) || movedBall.x < (2*movedBall.diameter) || movedBall.x > ( width-(2*movedBall.diameter)) ) {
+if ((myBall.x < (2*myBall.diameter) || myBall.x > ( width-(2*myBall.diameter)) || movedBall.x < (2*movedBall.diameter) || movedBall.x > ( width-(2*movedBall.diameter)))) {
+    if (explosion==true) {
     if (myBall.x < (2*myBall.diameter) || myBall.x > ( width-(2*myBall.diameter)) ) netExplosion(myBall.x, myBall.y);
     if (movedBall.x < (2*movedBall.diameter) || movedBall.x > ( width-(2*movedBall.diameter)) ) netExplosion(movedBall.x, movedBall.y);
+    }
+    explosion=false;
   } //Goal, firework constructor execution, based on x-value
+  else 
+  {
+  explosion=true;
+  }
   //
   for (int i=0; i < fireworks.length; i++) {
     fireworks[i].draw();
