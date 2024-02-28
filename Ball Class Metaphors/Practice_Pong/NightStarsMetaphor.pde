@@ -3,11 +3,12 @@ int NumberOfStars=300;
 Star[] stars = new Star[NumberOfStars];
 
 void starsSetup() {
-  createStars();
 }//end setup
 //
 void starsDraw() {
   background(#000000);
+  fill(255);
+  createStars();
   for (int i=0; i<stars.length; i++) {
     stars[i].draw();
   }

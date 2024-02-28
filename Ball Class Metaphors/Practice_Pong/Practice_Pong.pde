@@ -1,7 +1,7 @@
 //global variables and objects
-Ball myBall; // Both 1/2's of constructor
+Ball myBall, movedBall; // Both 1/2's of constructor
 Ball[] fireworks = new Ball[25];
-Ball movedBall;
+Paddle myPaddle, yourPaddle;
 //
 color pongTableColour = #171CFA; //ERROR: move to table CLASS, 255 is full Blue
 boolean speedNerf = true;
@@ -12,16 +12,20 @@ void setup() {
   //ScreenSizeChecker for landscape, portrait, square views
   //Updated automatically for screen rotation on android
   // Population
+  starsSetup();
   myBall = new Ball();
   for (int i=0; i < fireworks.length; i++) {
     fireworks[i] = new Ball( width*-1, height*-1, 0.5 );
   }
   movedBall = new Ball(width*-1, height*-1, myBall.diameter, myBall.colour, myBall.xSpeed, myBall.ySpeed);
+  myPaddle = new Paddle( 0 );
+  yourPaddle = new Paddle( width );
   //
 } //end setup
 //
 void draw() { 
-  background(pongTableColour); //Night mode is known in CLASS, not DRIVER
+  //background(pongTableColour); //Night mode is known in CLASS, not DRIVER
+  starsDraw();
   if (speedNerf==true && myBall.xSpeed > 9) {
     myBall.xSpeed/=1.25;
   }
@@ -63,6 +67,7 @@ void keyReleased() {
   speedNerf=true;
 } //end KeyReleased
 void mousePressed() {
+  starsMousePressed();
   for (int i=0; i < fireworks.length; i++) {
     fireworks[i] = new Ball(mouseX, mouseY, 0.5);
   }
