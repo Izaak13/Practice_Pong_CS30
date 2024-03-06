@@ -18,14 +18,19 @@ void setup() {
     fireworks[i] = new Ball( width*-1, height*-1, 0.5 );
   }
   movedBall = new Ball(width*-1, height*-1, myBall.diameter, myBall.colour, myBall.xSpeed, myBall.ySpeed);
-  myPaddle = new Paddle( 0 );
-  yourPaddle = new Paddle( width );
+  myPaddle = new Paddle( 0, myBall.diameter );
+  yourPaddle = new Paddle( width, myBall.diameter);
   //
 } //end setup
 //
 void draw() { 
   //background(pongTableColour); //Night mode is known in CLASS, not DRIVER
   starsDraw();
+  //
+  //paddles drawn before ball
+  myPaddle.draw();
+  yourPaddle.draw();
+  //
   if (speedNerf==true && myBall.xSpeed > 9) {
     myBall.xSpeed/=1.25;
   }
