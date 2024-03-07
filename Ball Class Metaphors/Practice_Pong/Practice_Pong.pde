@@ -6,6 +6,8 @@ Paddle myPaddle, yourPaddle;
 color pongTableColour = #171CFA; //ERROR: move to table CLASS, 255 is full Blue
 boolean speedNerf = true;
 boolean explosion = true;
+float gravity=0.5;
+boolean up=false, down=false; //keyPressed to draw, encapsulate later
 //
 void setup() {
   size(600, 400); //fullscreen(); displayWidth; displayHeight
@@ -27,6 +29,7 @@ void draw() {
   //background(pongTableColour); //Night mode is known in CLASS, not DRIVER
   starsDraw();
   //
+  //Arithmetic for paddles
   //paddles drawn before ball
   myPaddle.draw();
   yourPaddle.draw();
@@ -66,6 +69,11 @@ void keyPressed() {
     myBall.xSpeed*=1.25;
   }
   speedNerf=false;
+  //
+  if (key=='w' || key=='W') up=true;
+  if (key=='s' || key=='S') down=true;
+  if (key=='i' || key=='I') up=true;
+  if (key=='k' || key=='K') down=true;   
 } //end keyPressed
 //
 void keyReleased() {

@@ -6,7 +6,8 @@ class Paddle {
   //global variables
   float tableX, tableY, tableWidth, tableHeight;
   float netX, netY, netWidth, netHeight;
-  float paddleX, paddleY, paddleWidth, paddleHeight;
+  float paddleX, paddleY, paddleWidth, paddleHeight, paddleStartHeight;\
+  int paddleMove;
   color paddleColour;
   //
   //Overloaded constructor
@@ -21,15 +22,19 @@ class Paddle {
     }
   this.paddleX = netX + netWidth;
   if ( paddleStartParameter == width ) netX = paddleStartParameter - netWidth;
-  paddleHeight = tableHeight*1/4; //color(int(random()), int(random()), int(random())
+  paddleStartHeight = .25;
+  this.paddleHeight = tableHeight*paddleStartHeight; //color(int(random()), int(random()), int(random())
   this.paddleY = tableY + (tableHeight * 1/2) - ( paddleHeight*1/2 );
   paddleColour = 255; //greyscale
+  paddleMove = 1; //easter egg, paddle speed is 1 pixel but can change
   } //end paddle constructor
   //
   void draw() {
     fill(paddleColour);
     paddles();
     fill(0);
+    if (up == true) movePaddleUp();
+    if (down == true) movePaddleDown();
   }//end draw
   //
   //VOIDs and RETURNs
@@ -38,11 +43,15 @@ class Paddle {
   } //End paddles
   //
   void movePaddleDown() {
-    paddleY+= paddleMove;
+    paddleY += paddleMove;
+    if ( paddleY > tableY+tableHeight-paddleHeight ) paddleY = tableY+tableHeight-paddleHeight;
+    down=false;
   } //end move paddleDown
   //
   void movePaddleUp() {
-    paddleY-= paddleMove;
+    paddleY -= paddleMove;
+    if ( paddleY < tableY ) paddleY = tableY; //error catch
+    up=false;
   } //end move paddleUp
   //
 }// end paddle
