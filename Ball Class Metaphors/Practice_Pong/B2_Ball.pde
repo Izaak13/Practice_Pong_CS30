@@ -88,13 +88,12 @@ class Ball
     step(); //manipulating the variables
   } //End draw
   void step() {
-    bounce();
     ySpeed += gravity; //ball() is not affected, gravity is zero for it
     x += xSpeed * xSpeedChange; //x = x + xSpeed
     y += ySpeed * ySpeedChange;
   } //End step
-  void bounce() {
+  void bounce(float topParameter, float bottomParameter) {
     if ( x < 0+(diameter*1/2) || x > width-(diameter*1/2) ) xSpeed *= xDirection; //Repetition is *-1
-    if ( y < 0+(diameter*1/2) || y > height-(diameter*1/2)) ySpeed *= yDirection; //Repetition is *-1
+    if ( y < topParameter+(diameter*1/2) || y > bottomParameter-(diameter*1/2)) ySpeed *= yDirection; //Repetition is *-1
   }//End bounce
 } //end BALL

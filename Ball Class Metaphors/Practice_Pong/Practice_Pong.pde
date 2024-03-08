@@ -7,7 +7,6 @@ color pongTableColour = #171CFA; //ERROR: move to table CLASS, 255 is full Blue
 boolean speedNerf = true;
 boolean explosion = true;
 float gravity=0.5;
-boolean up=false, down=false; //keyPressed to draw, encapsulate later
 //
 void setup() {
   size(600, 400); //fullscreen(); displayWidth; displayHeight
@@ -43,6 +42,9 @@ void draw() {
   } else {
     myBall.draw();
   }
+  //
+  myBall.bounce(myPaddle.tableY, myPaddle.tableBottom);
+  movedBall.bounce(myPaddle.tableY, myPaddle.tableBottom);
   //Trigger: left goal, right goal
   //ERROR: ball instance still bounces
 if ((myBall.x < (2*myBall.diameter) || myBall.x > ( width-(2*myBall.diameter)) || movedBall.x < (2*movedBall.diameter) || movedBall.x > ( width-(2*movedBall.diameter)))) {
@@ -70,14 +72,14 @@ void keyPressed() {
   }
   speedNerf=false;
   //
-  if (key=='w' || key=='W') up=true;
-  if (key=='s' || key=='S') down=true;
-  if (key=='i' || key=='I') up=true;
-  if (key=='k' || key=='K') down=true;   
+  myPaddle.keyPressedWS();
+  yourPaddle.keyPressedIK();
 } //end keyPressed
 //
 void keyReleased() {
   speedNerf=true;
+  myPaddle.keyReleasedWS();
+  yourPaddle.keyReleasedIK();
 } //end KeyReleased
 void mousePressed() {
   starsMousePressed();
