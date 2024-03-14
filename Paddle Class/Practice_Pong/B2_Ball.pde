@@ -95,9 +95,16 @@ class Ball
   void bounce(float topParameter, float bottomParameter) {
     if ( x < 0+(diameter*1/2) || x > width-(diameter*1/2) ) xSpeed *= xDirection; //Repetition is *-1
     if ( y < topParameter+(diameter*1/2) || y > bottomParameter-(diameter*1/2)) ySpeed *= yDirection; //Repetition is *-1
-    //paddle bounce code
+    //paddle horizontal bounce code
     if (x < width*1/2) {
-      if ( y < (myPaddle.paddleY+myPaddle.paddleHeight) & y > myPaddle.paddleY & x <= (myPaddle.paddleX+myPaddle.paddleWidth+diameter*1/2) & x >= (myPaddle.paddleX )) xSpeed *= xDirection;
+      if ( y < (myPaddle.paddleY+myPaddle.paddleHeight) & y > myPaddle.paddleY & x <= (myPaddle.paddleX+myPaddle.paddleWidth+diameter*1/2) & x >= (myPaddle.paddleX-diameter*1/2)) xSpeed *= xDirection;
+    }
+    if (x > width*1/2) {
+      if ( y < (yourPaddle.paddleY+yourPaddle.paddleHeight) & y > yourPaddle.paddleY & x >= (yourPaddle.paddleX-diameter*1/2) & x <= (yourPaddle.paddleX+yourPaddle.paddleWidth+diameter*1/2) ) xSpeed *= xDirection;
+    }
+    //paddle vertical bounce code
+    if (x < width*1/2) {
+      if ( ( y == (myPaddle.paddleY-diameter*1/2) & x <= (myPaddle.paddleX+myPaddle.paddleWidth) & x >= (myPaddle.paddleX )) || ( y == (myPaddle.paddleY+myPaddle.paddleHeight+diameter*1/2) & x <= (myPaddle.paddleX+myPaddle.paddleWidth) & x >= (myPaddle.paddleX ) ) ) ySpeed *= yDirection;
     }
     if (x > width*1/2) {
       if ( y < (yourPaddle.paddleY+yourPaddle.paddleHeight) & y > yourPaddle.paddleY & x >= (yourPaddle.paddleX-diameter*1/2) & x <= (yourPaddle.paddleX+yourPaddle.paddleWidth) ) xSpeed *= xDirection;
