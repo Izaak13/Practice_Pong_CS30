@@ -28,7 +28,7 @@ class Paddle {
   this.paddleHeight = tableHeight*paddleStartHeight; //color(int(random()), int(random()), int(random())
   this.paddleY = tableY + (tableHeight * 1/2) - ( paddleHeight*1/2 );
   paddleColour = 255; //greyscale
-  paddleMove =3; //easter egg, paddle speed is 1 pixel but can change
+  paddleMove =5; //easter egg, paddle speed is 1 pixel but can change
   } //end paddle constructor
   //
   void draw() {

@@ -67,16 +67,16 @@ class Ball
   } //End movedBall constructor
   //
   float xDirection() {
-    float xDirection = int ( random(-10, 10) );
-    while (xDirection > -5 && xDirection < 5) {
-      xDirection = int ( random(-10, 10) ); //variable must be populated first
+    float xDirection = int ( random(-6, 6) );
+    while (xDirection > -3 && xDirection < 3) {
+      xDirection = int ( random(-6, 6) ); //variable must be populated first
     }
     return xDirection;
   }
   float yDirection() {
-    float yDirection = int ( random(-10, 10) );
-    while (yDirection > -5 && yDirection < 5) {
-      yDirection = int ( random(-10, 10) ); //variable must be populated first
+    float yDirection = int ( random(-6, 6) );
+    while (yDirection > -3 && yDirection < 3) {
+      yDirection = int ( random(-6, 6) ); //variable must be populated first
     }
     return yDirection;  
   }
@@ -104,10 +104,10 @@ class Ball
     }
     //paddle vertical bounce code
     if (x < width*1/2) {
-      if ( ( y == (myPaddle.paddleY-diameter*1/2) & x <= (myPaddle.paddleX+myPaddle.paddleWidth) & x >= (myPaddle.paddleX )) || ( y == (myPaddle.paddleY+myPaddle.paddleHeight+diameter*1/2) & x <= (myPaddle.paddleX+myPaddle.paddleWidth) & x >= (myPaddle.paddleX ) ) ) ySpeed *= yDirection;
+      if ( y < (myPaddle.paddleY+myPaddle.paddleHeight+diameter*1/2) & y > myPaddle.paddleY-(diameter*1/2) & x >= myPaddle.paddleX & x <= (myPaddle.paddleX+myPaddle.paddleWidth) ) ySpeed *= yDirection;
     }
     if (x > width*1/2) {
-      if ( y < (yourPaddle.paddleY+yourPaddle.paddleHeight) & y > yourPaddle.paddleY & x >= (yourPaddle.paddleX-diameter*1/2) & x <= (yourPaddle.paddleX+yourPaddle.paddleWidth) ) xSpeed *= xDirection;
+      if ( y < (yourPaddle.paddleY+yourPaddle.paddleHeight+diameter*1/2) & y > yourPaddle.paddleY-(diameter*1/2) & x >= yourPaddle.paddleX & x <= (yourPaddle.paddleX+yourPaddle.paddleWidth) ) ySpeed *= yDirection;
     }
   }//End bounce
   //
