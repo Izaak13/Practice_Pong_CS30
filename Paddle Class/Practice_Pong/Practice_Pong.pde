@@ -4,7 +4,7 @@ Ball[] fireworks = new Ball[25];
 Paddle myPaddle, yourPaddle;
 //
 color pongTableColour = #171CFA; //ERROR: move to table CLASS, 255 is full Blue
-boolean speedNerf = true;
+boolean speedActive = true;
 boolean explosion = true;
 float gravity=0.5;
 //
@@ -33,9 +33,6 @@ void draw() {
   myPaddle.draw();
   yourPaddle.draw();
   //
-  if (speedNerf==true && myBall.xSpeed > 9) {
-    myBall.xSpeed/=1.25;
-  }
   if ( myBall.disappear == true ) {
     //EMPTY IF
     //myBall.step(); //Keeps active the variables but not .draw
@@ -70,17 +67,37 @@ if ((myBall.x < (2*myBall.diameter) || myBall.x > ( width-(2*myBall.diameter)) |
 } //end draw
 //
 void keyPressed() {
-  if (key=='h' || key=='H' && myBall.xSpeed < 15) {
+  if (key=='o' || key=='O') {
+    if (speedActive == true) {
     myBall.xSpeed*=1.25;
-  }
-  speedNerf=false; 
+    myBall.ySpeed*=1.25;
+    speedActive=false;
+    }
+  } 
+  if (key=='a' || key=='A') {
+    if (speedActive == true) {
+    myBall.xSpeed*=1.25;
+    myBall.ySpeed*=1.25;
+    speedActive=false;
+    }
+  } 
   //
   myPaddle.keyPressedWS();
   yourPaddle.keyPressedIK();
 } //end keyPressed
 //
 void keyReleased() {
-  speedNerf=true;
+  if (key=='o' || key=='O') {
+  myBall.xSpeed/=1.25;
+  myBall.ySpeed/=1.25;
+  speedActive=true;
+  }
+  if (key=='a' || key=='A') {
+  myBall.xSpeed/=1.25;
+  myBall.ySpeed/=1.25;
+  speedActive=true;
+  }
+  //
   myPaddle.keyReleasedWS();
   yourPaddle.keyReleasedIK();
 } //end KeyReleased
