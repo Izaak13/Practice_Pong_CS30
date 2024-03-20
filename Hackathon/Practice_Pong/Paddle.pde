@@ -13,11 +13,13 @@ class Paddle {
   //
   //Overloaded constructor
   Paddle (float paddleStartParameter, float ballDiameterParameter) {
+    tablePopulation(); //technically, vars populated twice
     netWidth = ballDiameterParameter*3;
     paddleWidth = ballDiameterParameter * 1/2;
     tableY = height * 1/10; 
     tableHeight = height * 4/5;
     tableBottom = tableY+tableHeight;
+    tableWidth = width+1;
     if (paddleStartParameter == 0) netX = paddleStartParameter; //Adding to the netXk
     if ( paddleStartParameter == width ) {
       netX = paddleStartParameter - netWidth*2 - paddleWidth; //Subtracting the netX
@@ -31,7 +33,18 @@ class Paddle {
   paddleMove =5; //easter egg, paddle speed is 1 pixel but can change
   } //end paddle constructor
   //
+  //Pong Table Constructor
+  //CAUTION: executes once, can be a problem
+  void tablePopulation() {
+    //table variables required for pong-paddle objects
+    tableX = -1;
+    tableY = height * 1/10; 
+    tableHeight = height * 4/5;
+    tableWidth = width+2;
+  }// end paddle for table constructor
   void draw() {
+    //CAUTION: pong table drawn 120 times a second, code in both paddle instances
+    //system resources ERROR: draw loop is too much for one drawing
     fill(paddleColour);
     paddles();
     fill(0);
@@ -40,6 +53,20 @@ class Paddle {
   }//end draw
   //
   //VOIDs and RETURNs
+  //draw table
+  void table() {
+    stroke(255);
+    fill(#234ECB);
+    rect(tableX, tableY, tableWidth, tableHeight); //need lines for design
+    strokeWeight(2);
+    ellipse(tableX+width/2, tableY+tableHeight/2, tableHeight/2, tableHeight/2);
+    line(tableX+width/2, tableY, tableX+width/2, tableHeight*1.125);
+    line(tableX+(myBall.diameter*3), tableY, tableX+(myBall.diameter*3), tableHeight*1.125);
+    line(tableX+width-(myBall.diameter*2.9), tableY, tableX+width-(myBall.diameter*2.9), tableHeight*1.125);
+    strokeWeight(1);
+    //line(); //alternative design
+  }//end table
+  //draw paddles
   void paddles() {
     rect(paddleX, paddleY, paddleWidth, paddleHeight);
   } //End paddles

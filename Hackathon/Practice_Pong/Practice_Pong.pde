@@ -1,7 +1,7 @@
 //global variables and objects
 Ball myBall, movedBall; // Both 1/2's of constructor
 Ball[] fireworks = new Ball[25];
-Paddle myPaddle, yourPaddle;
+Paddle pongTable, myPaddle, yourPaddle;
 //
 color pongTableColour = #171CFA; //ERROR: move to table CLASS, 255 is full Blue
 boolean speedActive = true;
@@ -9,7 +9,7 @@ boolean explosion = true;
 float gravity=0.5;
 //
 void setup() {
-  size(600, 400); //fullscreen(); displayWidth; displayHeight
+  size(700, 400); //fullscreen(); displayWidth; displayHeight
   //ScreenSizeChecker for landscape, portrait, square views
   //Updated automatically for screen rotation on android
   // Population
@@ -19,6 +19,8 @@ void setup() {
     fireworks[i] = new Ball( width*-1, height*-1, 0.5 );
   }
   movedBall = new Ball(width*-1, height*-1, myBall.diameter, myBall.colour, myBall.xSpeed, myBall.ySpeed);
+  //error: paddle constructor for table does not populate paddle variables before paddles, paddle variables fail due to NULL
+  //pongTable = new Paddle(); //rect(), drawn here
   myPaddle = new Paddle( 0, myBall.diameter );
   yourPaddle = new Paddle( width, myBall.diameter);
   //
@@ -30,6 +32,7 @@ void draw() {
   //
   //Arithmetic for paddles
   //paddles drawn before ball
+  myPaddle.table();
   myPaddle.draw();
   yourPaddle.draw();
   //
