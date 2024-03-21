@@ -66,6 +66,19 @@ class Paddle {
     strokeWeight(1);
     //line(); //alternative design
   }//end table
+  //draw buttons
+  void buttons() {
+    fill(#32F50C);
+    rect(width/15, height/60, width/6, height/15); //player 1
+    rect(width*14/15-width/6, height/60, width/6, height/15); //player 2
+    rect(width/4, height/60, width/12, height/15); //player 1 score
+    rect(width*3/4-width/12, height/60, width/12, height/15); //player 2 score
+    rect(width*2.5/6, height/60, width/6, height/15); //best of selector
+    //
+    rect(width/10, height*59/60-height/15, width/6, height/15); //opponent selector
+    rect(width*4.5/10, height*59/60-height/15, width/10, height/15); //pause game
+    rect(width*9/10-width/6, height*59/60-height/15, width/6, height/15); //quit
+  }//end buttons
   //draw paddles
   void paddles() {
     rect(paddleX, paddleY, paddleWidth, paddleHeight);

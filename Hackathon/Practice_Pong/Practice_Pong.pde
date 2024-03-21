@@ -33,6 +33,7 @@ void draw() {
   //Arithmetic for paddles
   //paddles drawn before ball
   myPaddle.table();
+  myPaddle.buttons();
   myPaddle.draw();
   yourPaddle.draw();
   //
@@ -91,14 +92,18 @@ void keyPressed() {
 //
 void keyReleased() {
   if (key=='o' || key=='O') {
+    if (speedActive == false) {
   myBall.xSpeed/=1.25;
   myBall.ySpeed/=1.25;
   speedActive=true;
+    }
   }
   if (key=='a' || key=='A') {
+    if (speedActive == false) {
   myBall.xSpeed/=1.25;
   myBall.ySpeed/=1.25;
   speedActive=true;
+    }
   }
   //
   myPaddle.keyReleasedWS();
@@ -110,6 +115,9 @@ void mousePressed() {
     fireworks[i] = new Ball(mouseX, mouseY, 0.5);
   }
   movedBall = new Ball(mouseX, mouseY, myBall.diameter, myBall.colour, myBall.xSpeed, myBall.ySpeed);
+  //
+  //button clicking
+  if (mouseX >= (width*9/10-width/6) && mouseX <= (width*9/10) && mouseY >= (height*59/60-height/15) && mouseY <= height*59/60) System. exit(0); //quit
 } //end mousePressed
 //
 void ballCollisions() {
