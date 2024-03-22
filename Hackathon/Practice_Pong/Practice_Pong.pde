@@ -7,6 +7,7 @@ color pongTableColour = #171CFA; //ERROR: move to table CLASS, 255 is full Blue
 boolean speedActive = true;
 boolean explosion = true;
 float gravity=0.5;
+int playerOneScore=0, playerTwoScore=0;
 //
 void setup() {
   size(700, 400); //fullscreen(); displayWidth; displayHeight
@@ -14,6 +15,7 @@ void setup() {
   //Updated automatically for screen rotation on android
   // Population
   starsSetup();
+  textSetup();
   myBall = new Ball();
   for (int i=0; i < fireworks.length; i++) {
     fireworks[i] = new Ball( width*-1, height*-1, 0.5 );
@@ -55,6 +57,8 @@ if ((myBall.x < (2*myBall.diameter) || myBall.x > ( width-(2*myBall.diameter)) |
     if (explosion==true) {
     if (myBall.x < (2*myBall.diameter) || myBall.x > ( width-(2*myBall.diameter)) ) netExplosion(myBall.x, myBall.y);
     if (movedBall.x < (2*movedBall.diameter) || movedBall.x > ( width-(2*movedBall.diameter)) ) netExplosion(movedBall.x, movedBall.y);
+    if (myBall.x < (2*myBall.diameter) || movedBall.x < (2*myBall.diameter)) playerTwoScore++;
+    if (myBall.x > ( width-(2*myBall.diameter)) || movedBall.x > ( width-(2*movedBall.diameter))) playerOneScore++;
     }
     explosion=false;
   } //Goal, firework constructor execution, based on x-value
@@ -66,8 +70,13 @@ if ((myBall.x < (2*myBall.diameter) || myBall.x > ( width-(2*myBall.diameter)) |
   for (int i=0; i < fireworks.length; i++) {
     fireworks[i].draw();
   }
-  println(fireworks[0].y);
   movedBall.draw();
+  //
+  //textDraw
+  textDraw(black, CENTER, TOP, font, "QUIT", width*9/10-width/6, height*59/60-height/15, width/6, height/15);
+  textDraw(black, CENTER, TOP, font, String.valueOf(playerOneScore), width/4, height/60, width/12, height/15);
+  textDraw(black, CENTER, TOP, font, String.valueOf(playerTwoScore), width*3/4-width/12, height/60, width/12, height/15);
+  //
 } //end draw
 //
 void keyPressed() {
@@ -111,10 +120,12 @@ void keyReleased() {
 } //end KeyReleased
 void mousePressed() {
   starsMousePressed();
+  if (mouseY > myPaddle.tableY && mouseY < (myPaddle.tableY+myPaddle.tableHeight)) {
   for (int i=0; i < fireworks.length; i++) {
     fireworks[i] = new Ball(mouseX, mouseY, 0.5);
   }
   movedBall = new Ball(mouseX, mouseY, myBall.diameter, myBall.colour, myBall.xSpeed, myBall.ySpeed);
+  }
   //
   //button clicking
   if (mouseX >= (width*9/10-width/6) && mouseX <= (width*9/10) && mouseY >= (height*59/60-height/15) && mouseY <= height*59/60) System. exit(0); //quit
