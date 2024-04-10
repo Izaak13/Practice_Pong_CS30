@@ -7,9 +7,16 @@ class Ball extends Circle {
   //
   //Methods
   //
-  void draw() {} //end draw
+  void draw() {
+    //border
+    strokeWeight(2);
+    //background colour
+    fill(#BC192C);
+    ellipse(x, y, w, h); //ball
+    //reset to defaults
+  } //end draw
   //
-  color nightModeColour() {
+  color backgroundColour() {
     color nm = 0;
     return nm;
   } //end night mode colour
@@ -18,4 +25,8 @@ class Ball extends Circle {
     //need to finish myself
   }//end move ball
   //
+  /* features:
+  - Ball in net triggers fireworks
+  - give ball net dimensions & when it scores
+  */
 } //end ball

@@ -13,13 +13,13 @@ abstract class Shape {
     this.w = w;//width
     this.h = h;//height
     this.c = c; //shape colour
-    rd = nightModeColour();
+    rd = backgroundColour();
   } //end constructor
   //
   //Methods
   void draw() {} //end draw
   //
-  color nightModeColour() {
+  color backgroundColour() {
     color nm = 0;
     return nm;
   } //end night mode colour

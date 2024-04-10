@@ -1,18 +1,19 @@
-class Fireworks extend Circle {
+class Fireworks extends Circle {
   //global variables
   //
-  Fireworks () {
+  Fireworks (float x, float y, float w, float h, color c) {
+    super(x, y, w, h, c);
   }//fireworks
   //Methods
   void draw() {} //End draw
   //
-  color nightModeColour() {
+  color backgroundColour() {
     color nm = 0;
     return nm;
   } //end night mode colour
   //
-  void move() {
-    //need to finish myself
+  void differentMove() {
+    //not the same as ball move
   }//end move ball
   //
 } //End fireworks
