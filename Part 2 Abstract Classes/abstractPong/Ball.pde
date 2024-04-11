@@ -10,8 +10,6 @@ class Ball extends Circle {
   void draw() {
     //border
     strokeWeight(2);
-    //background colour
-    fill(#BC192C);
     ellipse(x, y, w, h); //ball
     //reset to defaults
   } //end draw
