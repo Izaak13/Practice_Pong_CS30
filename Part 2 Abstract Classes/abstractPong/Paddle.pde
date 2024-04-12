@@ -8,8 +8,10 @@ class Paddle extends Rectangle {
   void draw() {
     //border
     strokeWeight(2);
+    fill(c);
     rect(x, y, w, h); //rectangle
     //reset to defaults
+    fill(255);
   }// end draw
   //
   //

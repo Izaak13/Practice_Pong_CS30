@@ -8,10 +8,10 @@ class PongTable extends Rectangle {
   void draw() {
     //border
     strokeWeight(5);
-    //background colour
-    fill(#1958BC);
+    fill(c);
     rect(x, y, w, h); //pong table
     //reset to defaults
+    fill(255);
   } //end draw
   //
   color backgroundColour() {
