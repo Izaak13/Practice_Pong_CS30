@@ -17,11 +17,14 @@ void setup() {
   int ballDiameter = (appWidth > appHeight) ? appHeight: appWidth;
   ballDiameter *= 0.05;
   ball = new Ball (pongTable.w/2, pongTable.y+(pongTable.h/2), ballDiameter, ballDiameter, #EA151C);
+  ball.pongTableUpdate(pongTable.y, pongTable.y+pongTable.h); //execute once
+  println(ball.pongTableTop);
   float netWidth = ballDiameter/2;
   float netHeight = pongTable.h/5;
   float netY = pongTable.y+pongTable.h/2-netHeight/2;
   paddle = new Paddle (ballDiameter*3, netY, netWidth, netHeight, #B9B9B9);
   paddle2 = new Paddle (displayWidth-ballDiameter*3.5, netY, netWidth, netHeight, #B9B9B9);
+
 }//end setup
 //
 void draw() {
@@ -32,6 +35,8 @@ void draw() {
   ball.draw();
   paddle.draw();
   paddle2.draw();
+  ball.move(2, 2, 1, 1);
+  //update ball.PaddleUpdate
 }//end draw
 //
 void mousePressed() {}//end mousePressed
