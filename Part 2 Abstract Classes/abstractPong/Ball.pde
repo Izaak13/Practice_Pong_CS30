@@ -22,6 +22,16 @@ class Ball extends Circle {
     return nm;
   } //end night mode colour
   //
+  //getters and setters
+  void pongTableUpdate(float topParameter, float bottomParameter) {
+    pongTableTop = topParameter;
+    pongTableBottom = bottomParameter;
+  }//end pong table update
+  /*void pongPaddleUpdate() {
+    left paddle bounce line
+    right paddle bounce line
+  }//end paddle update
+  //*/
   void move(int xSpeed, int ySpeed, int xSpeedChange, int ySpeedChange) {
     x += xSpeed * xSpeedChange; //x = x + xSpeed
     y += ySpeed * ySpeedChange;
@@ -29,22 +39,22 @@ class Ball extends Circle {
     //bounce off pongTable.y, paddles will be later
   }//end move ball
   //
-  void bounce(float diameter, float topParameter, float bottomParameter, float leftPaddleParameter, float rightPaddleParameter) {
-    if ( x < 0+(diameter*1/2) || x > width-(diameter*1/2) ) xSpeed *= xDirection; //Repetition is *-1
-    if ( y < topParameter+(diameter*1/2) || y > bottomParameter-(diameter*1/2)) ySpeed *= yDirection; //Repetition is *-1
+  void bounce(float diameter) {
+    if ( x < 0+(diameter*1/2) || x > width-(diameter*1/2) ) xSpeed *= -1; //Repetition is *-1
+    if ( y < pongTableTop+(diameter*1/2) || y > pongTableBottom-(diameter*1/2)) ySpeed *= -1; //Repetition is *-1
     //paddle horizontal bounce code
     if (x < width*1/2) {
-      if ( y < (myPaddle.paddleY+myPaddle.paddleHeight) & y > myPaddle.paddleY & x <= (myPaddle.paddleX+myPaddle.paddleWidth+diameter*1/2) & x >= (myPaddle.paddleX-diameter*1/2)) xSpeed *= xDirection;
+      if ( y < (lPaddle.y+lPaddle.h) & y > lPaddle.h & x <= (lPaddle.x+lPaddle.w+diameter*1/2) & x >= (lPaddle.x-diameter*1/2) ) xSpeed *= -1;
     }
     if (x > width*1/2) {
-      if ( y < (yourPaddle.paddleY+yourPaddle.paddleHeight) & y > yourPaddle.paddleY & x >= (yourPaddle.paddleX-diameter*1/2) & x <= (yourPaddle.paddleX+yourPaddle.paddleWidth+diameter*1/2) ) xSpeed *= xDirection;
+      if ( y < (rPaddle.y+rPaddle.h) & y > rPaddle.y & x >= (rPaddle.x-diameter*1/2) & x <= (rPaddle.x+rPaddle.w+diameter*1/2) ) xSpeed *= -1;
     }
     //paddle vertical bounce code
     if (x < width*1/2) {
-      if ( y < (myPaddle.paddleY+myPaddle.paddleHeight+diameter*1/2) & y > myPaddle.paddleY-(diameter*1/2) & x >= myPaddle.paddleX & x <= (myPaddle.paddleX+myPaddle.paddleWidth) ) ySpeed *= yDirection;
+      if ( y < (lPaddle.y+lPaddle.h+diameter*1/2) & y > lPaddle.y-(diameter*1/2) & x >= lPaddle.x & x <= (lPaddle.x+lPaddle.w) ) ySpeed *= -1;
     }
     if (x > width*1/2) {
-      if ( y < (yourPaddle.paddleY+yourPaddle.paddleHeight+diameter*1/2) & y > yourPaddle.paddleY-(diameter*1/2) & x >= yourPaddle.paddleX & x <= (yourPaddle.paddleX+yourPaddle.paddleWidth) ) ySpeed *= yDirection;
+      if ( y < (rPaddle.y+rPaddle.h+diameter*1/2) & y > rPaddle.y-(diameter*1/2) & x >= rPaddle.x & x <= (lPaddle.x+rPaddle.w) ) ySpeed *= -1;
     }
   }//end bounce ball
   //
@@ -52,15 +62,5 @@ class Ball extends Circle {
   - Ball in net triggers fireworks
   - give ball net dimensions & when it scores
   */
-  //
-  //getters and setters
-  void pongTableUpdate(float topParameter, float bottomParameter) {
-    pongTableTop = topParameter;
-    pongTableBottom = bottomParameter;
-  }//end pong table update
-  void pongPaddleUpdate() {
-    //left paddle bounce line
-    //right paddle bounce line
-  }//end paddle update
   //
 } //end ball
