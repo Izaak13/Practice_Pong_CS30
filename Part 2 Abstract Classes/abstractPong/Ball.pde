@@ -1,6 +1,6 @@
 class Ball extends Circle {
   //Global variables
-  float pongTableTop, pongTableBottom;
+  float pongTableTop, pongTableBottom, paddleLeftSurface, paddleRightSurface;
   //
   Ball(float x, float y, float w, float h, color c) {
     super(x, y, w, h, c);
@@ -27,11 +27,11 @@ class Ball extends Circle {
     pongTableTop = topParameter;
     pongTableBottom = bottomParameter;
   }//end pong table update
-  /*void pongPaddleUpdate() {
-    left paddle bounce line
-    right paddle bounce line
+  void pongPaddleUpdate(float leftParameter, float rightParameter) {
+    paddleLeftSurface = leftParameter;
+    paddleRightSurface = rightParameter;
   }//end paddle update
-  //*/
+  //
   void move(int xSpeed, int ySpeed, int xSpeedChange, int ySpeedChange) {
     x += xSpeed * xSpeedChange; //x = x + xSpeed
     y += ySpeed * ySpeedChange;
@@ -43,19 +43,19 @@ class Ball extends Circle {
     if ( x < 0+(diameter*1/2) || x > width-(diameter*1/2) ) xSpeed *= -1; //Repetition is *-1
     if ( y < pongTableTop+(diameter*1/2) || y > pongTableBottom-(diameter*1/2)) ySpeed *= -1; //Repetition is *-1
     //paddle horizontal bounce code
-    if (x < width*1/2) {
-      if ( y < (lPaddle.y+lPaddle.h) & y > lPaddle.h & x <= (lPaddle.x+lPaddle.w+diameter*1/2) & x >= (lPaddle.x-diameter*1/2) ) xSpeed *= -1;
+    if (x < width*1/2 && xSpeed<0) {
+      if ( y < (lPaddle.y+lPaddle.h) && y > lPaddle.y && x <= paddleLeftSurface && x >= lPaddle.x-ballDiameter/2  ) xSpeed *= -1;
     }
-    if (x > width*1/2) {
-      if ( y < (rPaddle.y+rPaddle.h) & y > rPaddle.y & x >= (rPaddle.x-diameter*1/2) & x <= (rPaddle.x+rPaddle.w+diameter*1/2) ) xSpeed *= -1;
+    if (x > width*1/2 && xSpeed>0) {
+      if ( y < (rPaddle.y+rPaddle.h) && y > rPaddle.y && x >= paddleRightSurface && x <= rPaddle.x+rPaddle.w+ballDiameter/2 ) xSpeed *= -1;
     }
     //paddle vertical bounce code
-    if (x < width*1/2) {
-      if ( y < (lPaddle.y+lPaddle.h+diameter*1/2) & y > lPaddle.y-(diameter*1/2) & x >= lPaddle.x & x <= (lPaddle.x+lPaddle.w) ) ySpeed *= -1;
+    /*if (y < (lPaddle.y+lPaddle.h/2) && ySpeed > 0) {
+      if ( y < (lPaddle.y+lPaddle.h+ballDiameter*1/2) && y > lPaddle.y-(diameter*1/2) && x >= lPaddle.x && x <= (lPaddle.x+lPaddle.w) ) ySpeed *= -1;
     }
-    if (x > width*1/2) {
-      if ( y < (rPaddle.y+rPaddle.h+diameter*1/2) & y > rPaddle.y-(diameter*1/2) & x >= rPaddle.x & x <= (lPaddle.x+rPaddle.w) ) ySpeed *= -1;
-    }
+    if (y > (lPaddle.y+lPaddle.h/2) && ySpeed < 0) {
+      if ( y < (rPaddle.y+rPaddle.h+diameter*1/2) && y > rPaddle.y-(ballDiameter*1/2) && x >= rPaddle.x && x <= (rPaddle.x+rPaddle.w) ) ySpeed *= -1;
+    }*/
   }//end bounce ball
   //
   /* features:
