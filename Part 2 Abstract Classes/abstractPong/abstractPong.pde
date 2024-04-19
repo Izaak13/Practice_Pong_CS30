@@ -3,10 +3,9 @@ PongTable pongTable;
 Ball ball;
 Paddle lPaddle;
 Paddle rPaddle;
-Fireworks fireworks;
-//Ball[] fireworks = new Ball[25];
+Fireworks[] fireworks = new Fireworks[25];
 int xSpeedDirection = 1;
-int xSpeed = 10, ySpeed = 20, xSpeedFactor = 1, ySpeedFactor = 1;
+int xSpeed = 5, ySpeed = 5, xSpeedFactor = 1, ySpeedFactor = 1;
 int ballDiameter;
 //
 void setup() {
@@ -28,7 +27,10 @@ void setup() {
   ball = new Ball (pongTable.w/2, pongTable.y+(pongTable.h/2), ballDiameter, ballDiameter, #EA151C);
   ball.pongTableUpdate(pongTable.y, pongTable.y+pongTable.h); //execute once
   ball.pongPaddleUpdate((lPaddle.x+lPaddle.w+ballDiameter*1/2), (rPaddle.x-ballDiameter*1/2));
-  fireworks = new Fireworks (appWidth*-1, appHeight*-1, ballDiameter, ballDiameter, ball.c);
+  for (int i=0; i<fireworks.length; i++) {
+    float fDiameter = random(width*1/25);
+    fireworks[i] = new Fireworks (appWidth*-1, appHeight*-1, fDiameter, fDiameter, color (random(255), random(255), random(255)));
+  }
 }//end setup
 //
 void draw() {
@@ -42,20 +44,21 @@ void draw() {
   ball.draw();
   lPaddle.draw();
   rPaddle.draw();
-  fireworks.draw();
   ball.move(xSpeed, ySpeed, xSpeedFactor, ySpeedFactor);
   ball.bounce( ballDiameter);
+  for (int i=0; i<fireworks.length; i++) {
+    fireworks[i].differentMove();
+  }
   //update ball.PaddleUpdate
 }//end draw
 //
 void mousePressed() {
-  fireworks.triggerUpdateXY(mouseX, mouseY, true);
+  for (int i=0; i < fireworks.length; i++) {
+    fireworks[i] = new Fireworks (appWidth*-1, appHeight*-1, ballDiameter, ballDiameter, ball.c);
+  }
 }//end mousePressed
 //
 void keyPressed() {
-  if (key=='S' || key=='s' ) {
-    fireworks.trigger=false;
-  }
 }//end key pressed
 //
 //end Driver
