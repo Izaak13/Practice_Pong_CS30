@@ -1,5 +1,6 @@
 class Ball extends Circle {
   //Global variables
+  float gravity=0;
   float pongTableTop, pongTableBottom, paddleLeftSurface, paddleRightSurface;
   //
   Ball(float x, float y, float w, float h, color c) {

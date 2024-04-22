@@ -1,17 +1,19 @@
-class Fireworks extends Ball {
+class Fireworks extends Circle {
   //global variables
-  float gravity = 1;
+  int gravity = 1;
   //
   Fireworks (float x, float y, float w, float h, color c) {
     super(x, y, w, h, c);
-    this.x = x;
-    this.y = y;
-    this.w = w;
-    this.h = h;
-    this.c = c;
   }//fireworks
+  //
   //Methods
   void draw() {
+    //border
+    strokeWeight(2);
+    fill(c);
+    ellipse(x, y, w, h); //ball
+    //reset to defaults
+    fill(255);
   } //End draw
   //
   color backgroundColour() {
@@ -20,9 +22,9 @@ class Fireworks extends Ball {
   } //end night mode colour
   //
   void differentMove() {
-    ySpeed += gravity; //ball() is not affected, gravity is zero for it
-    x += xSpeed; //x = x + xSpeed
-    y += ySpeed;
+    yFSpeed += gravity; //ball() is not affected, gravity is zero for it
+    x += xFSpeed; //x = x + xSpeed
+    y += yFSpeed;
     //not the same as ball move
   }//end move ball
   //

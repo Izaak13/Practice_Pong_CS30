@@ -5,7 +5,8 @@ Paddle lPaddle;
 Paddle rPaddle;
 Fireworks[] fireworks = new Fireworks[25];
 int xSpeedDirection = 1;
-int xSpeed = 5, ySpeed = 5, xSpeedFactor = 1, ySpeedFactor = 1;
+int xSpeed = 10, ySpeed = 5, xSpeedFactor = 1, ySpeedFactor = 1;
+int xFSpeed = 1, yFSpeed = 1;
 int ballDiameter;
 //
 void setup() {
@@ -27,7 +28,7 @@ void setup() {
   ball = new Ball (pongTable.w/2, pongTable.y+(pongTable.h/2), ballDiameter, ballDiameter, #EA151C);
   ball.pongTableUpdate(pongTable.y, pongTable.y+pongTable.h); //execute once
   ball.pongPaddleUpdate((lPaddle.x+lPaddle.w+ballDiameter*1/2), (rPaddle.x-ballDiameter*1/2));
-  for (int i=0; i<fireworks.length; i++) {
+  for (int i=0; i<3; i++) {
     float fDiameter = random(width*1/25);
     fireworks[i] = new Fireworks (appWidth*-1, appHeight*-1, fDiameter, fDiameter, color (random(255), random(255), random(255)));
   }
@@ -42,13 +43,14 @@ void draw() {
   fill(0);
   pongTable.draw();
   ball.draw();
+  for (int i=0; i < 3; i++) {
+    fireworks[i].draw();
+    fireworks[i].differentMove();
+  }
   lPaddle.draw();
   rPaddle.draw();
   ball.move(xSpeed, ySpeed, xSpeedFactor, ySpeedFactor);
   ball.bounce( ballDiameter);
-  for (int i=0; i<fireworks.length; i++) {
-    fireworks[i].differentMove();
-  }
   //update ball.PaddleUpdate
 }//end draw
 //
