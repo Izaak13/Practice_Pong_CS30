@@ -103,7 +103,7 @@ class Paddle {
   //
   void keyPressedIK() {
     if (key=='i' || key=='I') up=true;
-    if (key=='k' || key=='K') down=true;   
+    if (key=='k' || key=='K') down=true;
   }
   //
   void keyReleasedWS() {
