@@ -11,8 +11,8 @@ abstract class Scoreboard extends Rectangle {
     //border
     strokeWeight(2);
     //background colour
-    fill(#BC192C);
-    ellipse(x, y, w, h); //ball
+    fill(c);
+    rect(x, y, w, h);
     //reset to defaults
   } //end draw
   //

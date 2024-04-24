@@ -7,6 +7,8 @@ Fireworks[] fireworks = new Fireworks[20];
 int xSpeedDirection = 1;
 int xSpeed = 10, ySpeed = 5, xSpeedFactor = 1, ySpeedFactor = 1;
 int ballDiameter;
+boolean explosion=false;
+int playerOneScore, playerTwoScore;
 //
 void setup() {
   //size(400, 600); //landscape orientation
@@ -51,6 +53,25 @@ void draw() {
   ball.move( xSpeed, ySpeed, xSpeedFactor, ySpeedFactor );
   ball.bounce( ballDiameter );
   //update ball.PaddleUpdate
+  //
+  if ((ball.x < (2*ball.w) || ball.x > ( width-(2*ball.w)))) {
+    if (explosion==true) {
+      if (ball.x < (2*ball.w) || ball.x > ( width-(2*ball.w)) ) {
+        for (int i=0; i < fireworks.length; i++) {
+          fireworks[i] = new Fireworks ( ball.x, ball.y, ballDiameter, ballDiameter, ball.c );
+        }
+      }
+      if (ball.x < (2*ball.w)) playerTwoScore++;
+      if (ball.x > ( width-(2*ball.w))) playerOneScore++;
+    }
+    explosion=false;
+    //
+  } //Goal, firework constructor execution, based on x-value
+  else 
+  {
+  explosion=true;
+  }
+  //
 }//end draw
 //
 void mousePressed() {
@@ -61,6 +82,12 @@ void mousePressed() {
 //
 void keyPressed() {
   //if (key=='w'
+  lPaddle.keyPressedWS();
+  rPaddle.keyPressedIK();
 }//end key pressed
 //
+void keyReleased() {
+  lPaddle.keyReleasedWS();
+  rPaddle.keyReleasedIK();
+}//end key released
 //end Driver
