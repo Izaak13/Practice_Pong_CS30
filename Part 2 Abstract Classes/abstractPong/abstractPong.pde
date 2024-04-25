@@ -4,8 +4,9 @@ Ball ball;
 Paddle lPaddle;
 Paddle rPaddle;
 Fireworks[] fireworks = new Fireworks[20];
+Scoreboard title1, title2, score1, score2;
 int xSpeedDirection = 1;
-int xSpeed = 10, ySpeed = 5, xSpeedFactor = 1, ySpeedFactor = 1;
+int xSpeed = 15, ySpeed = 10, xSpeedFactor = 1, ySpeedFactor = 1;
 int ballDiameter;
 boolean explosion=false;
 int playerOneScore, playerTwoScore;
@@ -14,6 +15,7 @@ void setup() {
   //size(400, 600); //landscape orientation
   fullScreen();
   display();
+  textSetup();
   //night mode
   //error: 0 is not night mode
   color colourBackground = #1773E8; //Caution: using timer or button to change night mode`  
@@ -30,9 +32,13 @@ void setup() {
   ball.pongTableUpdate(pongTable.y, pongTable.y+pongTable.h); //execute once
   ball.pongPaddleUpdate((lPaddle.x+lPaddle.w+ballDiameter*1/2), (rPaddle.x-ballDiameter*1/2));
   for (int i=0; i<fireworks.length; i++) {
-    float fDiameter = random(width*1/25);
-    fireworks[i] = new Fireworks (appWidth*-1, appHeight*-1, fDiameter, fDiameter, color (random(255), random(255), random(255)));
+    float fDiameter = random(displayWidth*1/25);
+    fireworks[i] = new Fireworks (appWidth*-1, appHeight*-1, fDiameter, fDiameter, color (random(255), random(255), random(255)) );
   }
+  title1 = new Scoreboard (displayWidth*1/8, displayHeight*1/30, displayWidth*1/4, displayHeight*1/15, #8B8888);
+  title2 = new Scoreboard (displayWidth*7/8-displayWidth/4, displayHeight*1/30, displayWidth*1/4, displayHeight*1/15, #8B8888);
+  score1 = new Scoreboard (displayWidth*3.5/9, displayHeight*1/30, displayWidth*1/20, displayHeight*1/15, #8B8888);
+  score2 = new Scoreboard (displayWidth*5.5/9-displayWidth/20, displayHeight*1/30, displayWidth*1/20, displayHeight*1/15, #8B8888);
 }//end setup
 //
 void draw() {
@@ -52,6 +58,14 @@ void draw() {
   rPaddle.draw();
   ball.move( xSpeed, ySpeed, xSpeedFactor, ySpeedFactor );
   ball.bounce( ballDiameter );
+  title1.draw();
+  textDraw( white, CENTER, CENTER, font, "Player 1", displayWidth*1/8, displayHeight*1/30, displayWidth*1/4, displayHeight*1/15);
+  title2.draw();
+  textDraw( white, CENTER, CENTER, font, "Player 2", displayWidth*7/8-displayWidth/4, displayHeight*1/30, displayWidth*1/4, displayHeight*1/15);
+  score1.draw();
+  textDraw( white, CENTER, CENTER, font, String.valueOf(playerOneScore), displayWidth*3.5/9, displayHeight*1/30, displayWidth*1/20, displayHeight*1/15);
+  score2.draw();
+  textDraw( white, CENTER, CENTER, font, String.valueOf(playerTwoScore), displayWidth*5.5/9-displayWidth/20, displayHeight*1/30, displayWidth*1/20, displayHeight*1/15);
   //update ball.PaddleUpdate
   //
   if ((ball.x < (2*ball.w) || ball.x > ( width-(2*ball.w)))) {

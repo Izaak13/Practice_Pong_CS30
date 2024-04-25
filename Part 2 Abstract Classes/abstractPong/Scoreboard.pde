@@ -1,4 +1,4 @@
-abstract class Scoreboard extends Rectangle {
+class Scoreboard extends Rectangle {
   //Global variables
   //
   Scoreboard(float x, float y, float w, float h, color c) {
