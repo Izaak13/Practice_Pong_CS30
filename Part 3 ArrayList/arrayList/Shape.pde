@@ -4,6 +4,16 @@ abstract class Shape {
   float y;//y var, position
   float w;//width
   float h;//height
+  //future paddle array
+  //Note: width does not cahnge, stays local variable
+  float el; //left bounce edge, x-pixel
+  float er; //right bounce edge, x-pixel
+  float plt; //left top paddle y-pixel
+  float plb; //left bottom paddle y-pixel
+  float prt; //right top paddle y-pixel
+  float prb; //right bottom paddle y-pixel
+  // plt plb prt prb
+  //
   color c, rd; //shape colour, reset default
   //
   //constructor

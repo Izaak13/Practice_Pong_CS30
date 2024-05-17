@@ -10,4 +10,8 @@ abstract class Rectangle extends Shape {
   //
   abstract color backgroundColour();
   //
+  //Getters and setters
+  void updateSetup( float netWidth) {
+    
+  }
 }//end rectangle

@@ -11,7 +11,7 @@ class Fireworks extends Circle {
     this.fDiameter = random(width*1/30);
     this.xFSpeed = random(-5, 5);
     this.yFSpeed = random(-10, 5);
-    this.colour = color ( random(255), random(255), random(255));
+    this.colour = color (random(255), random(255), random(255));
   }//fireworks
   //
   //Methods
@@ -28,6 +28,9 @@ class Fireworks extends Circle {
     color nm = 0;
     return nm;
   } //end night mode colour
+  //
+  void updateSetup( float variable1, float variable2, float variable3, float variable4, float variable5, float variable6, float variable7, float variable8, float variable9, float variable10, float variable11 ) {
+  }
   //
   void differentMove() {
     yFSpeed += gravity; //ball() is not affected, gravity is zero for it
