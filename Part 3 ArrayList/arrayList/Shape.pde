@@ -13,6 +13,7 @@ abstract class Shape {
   float prt; //right top paddle y-pixel
   float prb; //right bottom paddle y-pixel
   // plt plb prt prb
+  boolean lUp, lDown, rUp, rDown;
   //
   color c, rd; //shape colour, reset default
   //

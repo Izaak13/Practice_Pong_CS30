@@ -13,15 +13,15 @@ class Paddle extends Rectangle {
     //border
     strokeWeight(2);
     fill(c);
+    rect(x, y, w, h);
+    /*
     if (x < pongTableMiddle) {
       rect(x, plt, w, h); //note: drawing paddle must change (plt)
     } else {
       rect( x, prt, w, h);
-    }
+    }*/
     //reset to defaults
     fill(255);
-    if (up == true) movePaddleUp();
-    if (down == true) movePaddleDown();
   }// end draw
   //
   color backgroundColour() {
@@ -68,27 +68,6 @@ class Paddle extends Rectangle {
     if ( y < tableY ) y = tableY; //error catch
     //this.up=false; //ERROR: boolean reset means only one paddle at a time, no gaming
   } //end move paddleUp
-  //
-  //
-  void keyPressedWS() {
-    if (key=='w' || key=='W') up=true;
-    if (key=='s' || key=='S') down=true;
-  }
-  //
-  void keyPressedIK() {
-    if (key=='i' || key=='I') up=true;
-    if (key=='k' || key=='K') down=true;
-  }
-  //
-  void keyReleasedWS() {
-    if (key=='w' || key=='W') up=false;
-    if (key=='s' || key=='S') down=false;
-  }
-  //
-  void keyReleasedIK() {
-    if (key=='i' || key=='I') up=false;
-    if (key=='k' || key=='K') down=false;   
-  }
   //
   //Getters and Setters
   void updateSetup( float pongTableMiddle ) {

@@ -1,6 +1,7 @@
 //
 //Global Variables 
 ArrayList<Shape> shapes = new ArrayList<Shape>();
+boolean lUp, lDown, rUp, rDown;
 //
 void setup() {
   fullScreen();
@@ -11,10 +12,10 @@ void setup() {
   //Build local objects - students to add, i.e. start with Ball, then pongTable, etc.
   //
   int ballDiameter = ( displayWidth > displayHeight ) ? displayHeight : displayWidth;
-  float netWidth = ballDiameter/2;
   //Objects Created:
-  ballDiameter = ballDiameter*1/60;
+  ballDiameter = ballDiameter*1/40;
   PongTable pongTable = new PongTable (0, displayHeight*1/8, displayWidth, displayHeight*4/5, #A27474);
+  float netWidth = ballDiameter/2;
   float netHeight = pongTable.h/5;
   float netY = pongTable.y+pongTable.h/2-netHeight/2;
   float lNetX = ballDiameter*3;
@@ -61,15 +62,19 @@ void draw() {
 void mousePressed() {
 }//end mousePressed
 //
-/*
 void keyPressed() {
-  lPaddle.keyPressedWS();
-  rPaddle.keyPressedIK();
+  if (key=='w' || key=='W') lUp=true;
+  if (key=='s' || key=='S') lDown=true;
+  //
+  if (key=='i' || key=='I') rUp=true;
+  if (key=='k' || key=='K') rDown=true;
 }//end keyPressed
 //
 void keyReleased() {
-  lPaddle.keyReleasedWS();
-  rPaddle.keyReleasedIK();
+  if (key=='w' || key=='W') lUp=false;
+  if (key=='s' || key=='S') lDown=false;
+  //
+  if (key=='i' || key=='I') rUp=false;
+  if (key=='k' || key=='K') rDown=false;
 }//end key released
-*/
 //end arrayList

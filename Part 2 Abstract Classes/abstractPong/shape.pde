@@ -5,6 +5,8 @@ abstract class Shape {
   float w;//width
   float h;//height
   color c, rd; //shape colour, reset default
+  boolean lUp, lDown, rUp, rDown;
+  
   //
   //constructor
   Shape(float x, float y, float w, float h, color c) { 
