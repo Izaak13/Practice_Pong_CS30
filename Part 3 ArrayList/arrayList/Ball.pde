@@ -1,8 +1,10 @@
 class Ball extends Circle {
   //Global variables for ball
-  float xSpeed, ySpeed, xSpeedChange, ySpeedChange;
   float pongTableTop, pongTableBottom, pongTableLeftSurface, pongTableRightSurface, pongTableMiddle;
   float leftPaddleTop, leftPaddleBottom, rightPaddleTop, rightPaddleBottom, paddleHeight;
+  float diameter;
+  int xSpeed = 10;
+  int ySpeed = 10;
   Fireworks fireworks;
   //
   Ball(float x, float y, float w, float h, color c) {
@@ -17,6 +19,19 @@ class Ball extends Circle {
     strokeWeight(2);
     ellipse(x, y, w, h); //ball
     fill(255);
+    //move
+    x += xSpeed; //x = x + xSpeed
+    y += ySpeed;
+    //bounce
+    if ( x < 0+(diameter*1/2) || x > width-(diameter*1/2) ) xSpeed *= -1; //Repetition is *-1
+    if ( y < pongTableTop+(diameter*1/2) || y > pongTableBottom-(diameter*1/2)) ySpeed *= -1; //Repetition is *-1
+    //paddle horizontal bounce code
+    if (x < width*1/2 && xSpeed<0) {
+      if ( y < (leftPaddleTop+paddleHeight) && y > leftPaddleTop && x <= el && x >= el-this.w  ) xSpeed *= -1;
+    }
+    if (x > width*1/2 && xSpeed>0) {
+      if ( y < (rightPaddleTop+paddleHeight) && y > rightPaddleTop && x >= er && x <= er+this.w ) xSpeed *= -1;
+    }
     //
     /*
     if ( s==false && ( x>el && x<er ) ) { //Logical Short Circuit Boolean, !=
@@ -54,7 +69,7 @@ class Ball extends Circle {
   } //end night mode colour
   //
   //getters and setters
-  void updateSetup( float leftParameter, float rightParameter, float topParameter, float bottomParameter, float middleParameter, float leftPaddleEdge, float rightPaddleEdge, float leftPaddleTopParameter, float leftPaddleBottomParameter, float rightPaddleTopParameter, float rightPaddleBottomParameter ) {
+  void updateSetup( float leftParameter, float rightParameter, float topParameter, float bottomParameter, float middleParameter, float leftPaddleEdge, float rightPaddleEdge, float leftPaddleTopParameter, float leftPaddleBottomParameter, float rightPaddleTopParameter, float rightPaddleBottomParameter, float ballDiameter ) {
     pongTableLeftSurface = leftParameter;
     pongTableRightSurface = rightParameter;
     pongTableTop = topParameter;
@@ -62,6 +77,7 @@ class Ball extends Circle {
     pongTableMiddle = middleParameter;
     el = leftPaddleEdge; //Left Paddle X Bounce Line //NOTE: second population
     er = rightPaddleEdge; //Right Paddles X Bounce Line //NOTE: second population
+    diameter = ballDiameter;
     //s = false; //Note: FIRST population
     paddleUpdate(leftPaddleTopParameter, leftPaddleBottomParameter, rightPaddleTopParameter, rightPaddleBottomParameter); //Executes Only Once in setup()
     //
@@ -70,9 +86,9 @@ class Ball extends Circle {
     xSpeed = xDirection(); //float, could be any number
     ySpeed = yDirection(); //float, could be any number
     //ERROR: random() will choose ZERO, not only -1 & 1
-    */
     xSpeedChange = 1; //Break bounce physics
     ySpeedChange = 1; //Change speeds
+    */
   } //End Pong Table Update
   //for setup() & draw()
   void paddleUpdate( float leftPaddleTopParameter, float leftPaddleBottomParameter, float rightPaddleTopParameter, float rightPaddleBottomParameter ) {
@@ -82,7 +98,6 @@ class Ball extends Circle {
     rightPaddleBottom = rightPaddleBottomParameter;
     paddleHeight = leftPaddleBottom-leftPaddleTop;
   } //End Paddle Update
-  
   /*
   void pongTableUpdate(float topParameter, float bottomParameter) {
     pongTableTop = topParameter;
