@@ -30,6 +30,10 @@ abstract class Shape {
   //Methods
   void draw() {} //end draw
   //
+  void keyPressed() {}//end keyPressed
+  //
+  void keyReleased() {}//end keyReleased
+  //
   color backgroundColour() {
     color nm = 0;
     return nm;

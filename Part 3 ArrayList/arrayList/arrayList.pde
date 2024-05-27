@@ -64,18 +64,14 @@ void mousePressed() {
 }//end mousePressed
 //
 void keyPressed() {
-  if (key=='w' || key=='W') lUp=true;
-  if (key=='s' || key=='S') lDown=true;
-  //
-  if (key=='i' || key=='I') rUp=true;
-  if (key=='k' || key=='K') rDown=true;
+  for (Shape s : shapes) {
+    s.keyPressed();
+  }
 }//end keyPressed
 //
 void keyReleased() {
-  if (key=='w' || key=='W') lUp=false;
-  if (key=='s' || key=='S') lDown=false;
-  //
-  if (key=='i' || key=='I') rUp=false;
-  if (key=='k' || key=='K') rDown=false;
+  for (Shape s : shapes) {
+    s.keyReleased();
+  }
 }//end key released
 //end arrayList

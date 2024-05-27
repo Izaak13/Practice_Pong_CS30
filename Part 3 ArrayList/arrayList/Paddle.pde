@@ -14,15 +14,36 @@ class Paddle extends Rectangle {
     strokeWeight(2);
     fill(c);
     rect(x, y, w, h);
-    /*
-    if (x < pongTableMiddle) {
-      rect(x, plt, w, h); //note: drawing paddle must change (plt)
-    } else {
-      rect( x, prt, w, h);
-    }*/
+    if (lUp == true && x < pongTableMiddle) {
+      movePaddleUp();
+    }
+    if (rUp == true && x > pongTableMiddle) {
+      y -= this.h/25;
+      if ( y < tableY ) y = tableY; //error catch
+    }
+    if (lDown == true && x < pongTableMiddle) {
+      y += this.h/25;
+      if ( y < tableY ) y = tableY; //error catch
+    }
     //reset to defaults
     fill(255);
   }// end draw
+  //
+  void keyPressed() {
+    if (key=='w' || key=='W') lUp=true;
+    if (key=='s' || key=='S') lDown=true;
+    //
+    if (key=='i' || key=='I') rUp=true;
+    if (key=='k' || key=='K') rDown=true;
+  }//end keyPressed
+  //
+  void keyReleased() {
+    if (key=='w' || key=='W') lUp=false;
+    if (key=='s' || key=='S') lDown=false;
+    //
+    if (key=='i' || key=='I') rUp=false;
+    if (key=='k' || key=='K') rDown=false;
+  }//end key released
   //
   color backgroundColour() {
     color nm = 0;
