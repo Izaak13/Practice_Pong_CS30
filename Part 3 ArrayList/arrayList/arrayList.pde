@@ -1,7 +1,7 @@
 //
 //Global Variables 
 ArrayList<Shape> shapes = new ArrayList<Shape>();
-boolean lUp, lDown, rUp, rDown;
+float lPaddleTop, rPaddleTop;
 //
 void setup() {
   fullScreen();
@@ -15,7 +15,7 @@ void setup() {
   //Objects Created:
   ballDiameter = ballDiameter*1/40;
   PongTable pongTable = new PongTable (0, displayHeight*1/8, displayWidth, displayHeight*4/5, #A27474);
-  float netWidth = ballDiameter;
+  float netWidth = ballDiameter/2;
   float netHeight = pongTable.h/5;
   float netY = pongTable.y+pongTable.h/2-netHeight/2;
   float lNetX = ballDiameter*3;
@@ -53,6 +53,9 @@ void draw() {
   //
   for (Shape s : shapes) {
     s.draw();
+  }
+  for (Shape s : shapes) {
+    s.paddleUpdate(lPaddleTop, rPaddleTop);
   }
   /*for (int i=0; i<shapes.size(); i++) {
     shapes.get(i).draw();

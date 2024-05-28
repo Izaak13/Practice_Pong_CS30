@@ -79,7 +79,7 @@ class Ball extends Circle {
     er = rightPaddleEdge; //Right Paddles X Bounce Line //NOTE: second population
     diameter = ballDiameter;
     //s = false; //Note: FIRST population
-    paddleUpdate(leftPaddleTopParameter, leftPaddleBottomParameter, rightPaddleTopParameter, rightPaddleBottomParameter); //Executes Only Once in setup()
+    //paddleUpdate(leftPaddleTopParameter, leftPaddleBottomParameter, rightPaddleTopParameter, rightPaddleBottomParameter); //Executes Only Once in setup()
     //
     //For Moving the Ball, Executed Once
     /*
@@ -91,11 +91,9 @@ class Ball extends Circle {
     */
   } //End Pong Table Update
   //for setup() & draw()
-  void paddleUpdate( float leftPaddleTopParameter, float leftPaddleBottomParameter, float rightPaddleTopParameter, float rightPaddleBottomParameter ) {
-    leftPaddleTop = leftPaddleTopParameter;
-    leftPaddleBottom = leftPaddleBottomParameter;
-    rightPaddleTop = rightPaddleTopParameter;
-    rightPaddleBottom = rightPaddleBottomParameter;
+  void paddleUpdate( float leftPaddleTopParameter, float rightPaddleTopParameter) {
+    lPaddleTop = leftPaddleTopParameter;
+    rPaddleTop = rightPaddleTopParameter;
     paddleHeight = leftPaddleBottom-leftPaddleTop;
   } //End Paddle Update
   /*
@@ -122,10 +120,10 @@ class Ball extends Circle {
     if ( y < pongTableTop+(diameter*1/2) || y > pongTableBottom-(diameter*1/2)) ySpeed *= -1; //Repetition is *-1
     //paddle horizontal bounce code
     if (x < width*1/2 && xSpeed<0) {
-      if ( y < (leftPaddleTop+paddleHeight) && y > leftPaddleTop && x <= el && x >= el-this.w  ) xSpeed *= -1;
+      if ( y < (lPaddleTop+paddleHeight) && y > lPaddleTop && x <= el && x >= el-this.w  ) xSpeed *= -1;
     }
     if (x > width*1/2 && xSpeed>0) {
-      if ( y < (rightPaddleTop+paddleHeight) && y > rightPaddleTop && x >= er && x <= er+this.w ) xSpeed *= -1;
+      if ( y < (rPaddleTop+paddleHeight) && y > rPaddleTop && x >= er && x <= er+this.w ) xSpeed *= -1;
     }
     //paddle vertical bounce code
     /*if (y < (lPaddle.y+lPaddle.h/2) && ySpeed > 0) {

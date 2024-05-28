@@ -34,6 +34,10 @@ abstract class Shape {
   //
   void keyReleased() {}//end keyReleased
   //
+  void paddleUpdate(float lPaddleTopParameter, float rPaddleTopParameter) {
+    lPaddleTop = lPaddleTopParameter;
+    rPaddleTop = rPaddleTopParameter;
+  }//end paddleUpdate
   color backgroundColour() {
     color nm = 0;
     return nm;

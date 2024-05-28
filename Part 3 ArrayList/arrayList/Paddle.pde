@@ -26,6 +26,8 @@ class Paddle extends Rectangle {
     if (rDown == true && x > pongTableMiddle) {
       movePaddleDown();
     }
+    //
+    lPaddleTop = y;
     //reset to defaults
     fill(255);
   }// end draw
