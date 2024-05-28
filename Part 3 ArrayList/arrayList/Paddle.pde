@@ -18,12 +18,13 @@ class Paddle extends Rectangle {
       movePaddleUp();
     }
     if (rUp == true && x > pongTableMiddle) {
-      y -= this.h/25;
-      if ( y < tableY ) y = tableY; //error catch
+      movePaddleUp();
     }
     if (lDown == true && x < pongTableMiddle) {
-      y += this.h/25;
-      if ( y < tableY ) y = tableY; //error catch
+      movePaddleDown();
+    }
+    if (rDown == true && x > pongTableMiddle) {
+      movePaddleDown();
     }
     //reset to defaults
     fill(255);
@@ -79,19 +80,15 @@ class Paddle extends Rectangle {
   - give ball x-var to bounce between two y-variables
   */
   void movePaddleDown() {
-    y += this.h/5;
+    y += this.h/20;
     if ( y > tableY+tableHeight-h ) y = tableY+tableHeight-h;
     //down=false; //ERROR: boolean reset means only one paddle at a time, no gaming
   } //end move paddleDown
   //
   void movePaddleUp() {
-    y -= this.h/5;
+    y -= this.h/20;
     if ( y < tableY ) y = tableY; //error catch
     //this.up=false; //ERROR: boolean reset means only one paddle at a time, no gaming
   } //end move paddleUp
   //
-  //Getters and Setters
-  void updateSetup( float pongTableMiddle ) {
-    
-  }
 }//end paddle class

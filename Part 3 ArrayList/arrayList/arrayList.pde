@@ -15,7 +15,7 @@ void setup() {
   //Objects Created:
   ballDiameter = ballDiameter*1/40;
   PongTable pongTable = new PongTable (0, displayHeight*1/8, displayWidth, displayHeight*4/5, #A27474);
-  float netWidth = ballDiameter/2;
+  float netWidth = ballDiameter;
   float netHeight = pongTable.h/5;
   float netY = pongTable.y+pongTable.h/2-netHeight/2;
   float lNetX = ballDiameter*3;
@@ -23,8 +23,8 @@ void setup() {
   pongTable.update( ballDiameter*2, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 );
   Paddle lPaddle = new Paddle (lNetX, netY, netWidth, netHeight, color (random(255), random(255), random(255)));
   Paddle rPaddle = new Paddle (rNetX, netY, netWidth, netHeight, color (random(255), random(255), random(255)));
-  lPaddle.updateSetup( pongTable.w*1/2, lNetX, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 );
-  rPaddle.updateSetup( pongTable.w*1/2, rNetX, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 );
+  lPaddle.updateSetup( pongTable.w*1/2, lNetX, pongTable.y, pongTable.h, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 );
+  rPaddle.updateSetup( pongTable.w*1/2, rNetX, pongTable.y, pongTable.h, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 );
   Ball ball = new Ball (pongTable.w/2, pongTable.y+(pongTable.h/2), ballDiameter, ballDiameter, #EA151C);
   ball.updateSetup( pongTable.x, pongTable.x+pongTable.w, pongTable.y, pongTable.y+pongTable.h, pongTable.middlePongTableX, lPaddle.el, rPaddle.er, lPaddle.y, lPaddle.y+lPaddle.h, rPaddle.y, rPaddle.y+rPaddle.h, ballDiameter );
   Fireworks[] fireworks = new Fireworks[20];
