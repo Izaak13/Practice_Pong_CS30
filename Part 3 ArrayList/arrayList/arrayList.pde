@@ -1,6 +1,7 @@
 //
 //Global Variables 
 ArrayList<Shape> shapes = new ArrayList<Shape>();
+ArrayList<Ball> ball = new ArrayList<Ball>();
 float lPaddleTop, rPaddleTop;
 //
 void setup() {
@@ -53,9 +54,6 @@ void draw() {
   //
   for (Shape s : shapes) {
     s.draw();
-  }
-  for (Shape s : shapes) {
-    s.paddleUpdate(lPaddleTop, rPaddleTop);
   }
   /*for (int i=0; i<shapes.size(); i++) {
     shapes.get(i).draw();

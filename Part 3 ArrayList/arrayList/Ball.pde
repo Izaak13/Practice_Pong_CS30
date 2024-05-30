@@ -27,11 +27,12 @@ class Ball extends Circle {
     if ( y < pongTableTop+(diameter*1/2) || y > pongTableBottom-(diameter*1/2)) ySpeed *= -1; //Repetition is *-1
     //paddle horizontal bounce code
     if (x < width*1/2 && xSpeed<0) {
-      if ( y < (leftPaddleTop+paddleHeight) && y > leftPaddleTop && x <= el && x >= el-this.w  ) xSpeed *= -1;
+      if ( y < (lPaddleTop+paddleHeight) && y > lPaddleTop && x <= el+w/2 && x >= el-this.w  ) xSpeed *= -1;
     }
     if (x > width*1/2 && xSpeed>0) {
-      if ( y < (rightPaddleTop+paddleHeight) && y > rightPaddleTop && x >= er && x <= er+this.w ) xSpeed *= -1;
+      if ( y < (rPaddleTop+paddleHeight) && y > rPaddleTop && x >= er-w/2 && x <= er+this.w ) xSpeed *= -1;
     }
+    println();
     //
     /*
     if ( s==false && ( x>el && x<er ) ) { //Logical Short Circuit Boolean, !=
@@ -78,6 +79,7 @@ class Ball extends Circle {
     el = leftPaddleEdge; //Left Paddle X Bounce Line //NOTE: second population
     er = rightPaddleEdge; //Right Paddles X Bounce Line //NOTE: second population
     diameter = ballDiameter;
+    paddleHeight = leftPaddleBottomParameter - leftPaddleTopParameter;
     //s = false; //Note: FIRST population
     //paddleUpdate(leftPaddleTopParameter, leftPaddleBottomParameter, rightPaddleTopParameter, rightPaddleBottomParameter); //Executes Only Once in setup()
     //
@@ -94,7 +96,7 @@ class Ball extends Circle {
   void paddleUpdate( float leftPaddleTopParameter, float rightPaddleTopParameter) {
     lPaddleTop = leftPaddleTopParameter;
     rPaddleTop = rightPaddleTopParameter;
-    paddleHeight = leftPaddleBottom-leftPaddleTop;
+    //paddleHeight = leftPaddleBottom-leftPaddleTop;
   } //End Paddle Update
   /*
   void pongTableUpdate(float topParameter, float bottomParameter) {
@@ -115,6 +117,7 @@ class Ball extends Circle {
   //
   //Getters and setters
   //
+  /*
   void bounce(float diameter) {
     if ( x < 0+(diameter*1/2) || x > width-(diameter*1/2) ) xSpeed *= -1; //Repetition is *-1
     if ( y < pongTableTop+(diameter*1/2) || y > pongTableBottom-(diameter*1/2)) ySpeed *= -1; //Repetition is *-1
@@ -131,7 +134,7 @@ class Ball extends Circle {
     }
     if (y > (lPaddle.y+lPaddle.h/2) && ySpeed < 0) {
       if ( y < (rPaddle.y+rPaddle.h+diameter*1/2) && y > rPaddle.y-(ballDiameter*1/2) && x >= rPaddle.x && x <= (rPaddle.x+rPaddle.w) ) ySpeed *= -1;
-    }*/
+    }
     } //end bounce ball
   //
   /* features:
