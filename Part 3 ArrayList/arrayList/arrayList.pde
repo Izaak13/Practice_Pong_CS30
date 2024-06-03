@@ -37,7 +37,7 @@ void setup() {
     float fDiameter = random(displayWidth*1/25);
     fireworks[i] = new Fireworks (displayWidth*-1, displayHeight*-1, fDiameter, fDiameter, color (random(255), random(255), random(255)));
   }
-  //Paddle Update
+  //
   shapes.add(pongTable); //Element 0, pongTable
   shapes.add(lPaddle);
   shapes.add(rPaddle);
@@ -46,6 +46,9 @@ void setup() {
   shapes.add(title2);
   shapes.add(score1);
   shapes.add(score2);
+  for (int i=0; i<fireworks.length; i++) {
+    shapes.add(fireworks[i]);
+  }
   //
 }//end setup
 //

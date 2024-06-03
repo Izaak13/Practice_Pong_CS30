@@ -22,7 +22,7 @@ class PongTable extends Rectangle {
     color colour=0;
     return colour;
   }
-  //getters and setters
+  //getters and settersj
   void update( float netWidth, float variable2, float variable3, float variable4, float variable5, float variable6, float variable7, float variable8, float variable9, float variable10, float variable11 ) {
     leftNetX_Top = x+netWidth;
     leftNetY_Top = y;
