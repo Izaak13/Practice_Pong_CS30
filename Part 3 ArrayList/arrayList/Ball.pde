@@ -5,6 +5,8 @@ class Ball extends Circle {
   float diameter;
   int xSpeed = 10;
   int ySpeed = 10;
+  boolean explosionActivate;
+  int playerOneScore, playerTwoScore;
   Fireworks fireworks;
   //
   Ball(float x, float y, float w, float h, color c) {
@@ -114,6 +116,26 @@ class Ball extends Circle {
     //need to finish myself
     //bounce off pongTable.y, paddles will be later
   }//end move ball
+  //
+  void explosionTrigger() {
+    if ((x < (2*w) || x > ( width-(2*w)))) {
+      if (explosionActivate==true) {
+      if (x < (2*w) || x > ( width-(2*w)) ) {
+          for (Shape s : shapes) {
+          s.explosion();
+          }
+          }
+        }
+      if (x < (2*w)) playerTwoScore++;
+      if (x > ( width-(2*w))) playerOneScore++;
+      explosionActivate=false;
+      //
+    } //Goal, firework constructor execution, based on x-value
+    else
+    {
+      explosionActivate=true;
+    }
+  }
   //
   //Getters and setters
   //

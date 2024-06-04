@@ -38,6 +38,8 @@ abstract class Shape {
     lPaddleTop = lPaddleTopParameter;
     rPaddleTop = rPaddleTopParameter;
   }//end paddleUpdate
+  void explosion(){
+  }
   color backgroundColour() {
     color nm = 0;
     return nm;

@@ -22,6 +22,7 @@ class Fireworks extends Circle {
     ellipse(x, y, fDiameter, fDiameter); //ball
     //reset to defaults
     fill(255);
+    differentMove();
   } //End draw
   //
   color backgroundColour() {
@@ -30,6 +31,12 @@ class Fireworks extends Circle {
   } //end night mode colour
   //
   void updateSetup( float variable1, float variable2, float variable3, float variable4, float variable5, float variable6, float variable7, float variable8, float variable9, float variable10, float variable11 ) {
+  }
+  //
+  void explosion() {
+    for (int i=0; i < fireworks.length; i++) {
+          fireworks[i] = new Fireworks ( x, y, ballDiameter, ballDiameter, c );
+    }
   }
   //
   void differentMove() {
