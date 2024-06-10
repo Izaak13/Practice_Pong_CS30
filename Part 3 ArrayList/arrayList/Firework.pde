@@ -1,10 +1,12 @@
 class Fireworks extends Circle {
   //global variables
-  int gravity = 1;
+  float gravity = 0.5;
   float fDiameter;
   float xFSpeed;
   float yFSpeed;
   color colour;
+  float ballX, ballY;
+  Fireworks[] fireworks = new Fireworks[20];
   //
   Fireworks (float x, float y, float w, float h, color c) {
     super(x, y, w, h, c);
@@ -30,12 +32,23 @@ class Fireworks extends Circle {
     return nm;
   } //end night mode colour
   //
-  void updateSetup( float variable1, float variable2, float variable3, float variable4, float variable5, float variable6, float variable7, float variable8, float variable9, float variable10, float variable11 ) {
+  void ballUpdate(float ballXParameter, float ballYParameter, float ballDiameterParameter) {
+    ballX = ballXParameter;
+    ballY = ballYParameter;
+    ballDiameter = ballDiameterParameter;
+  }
+  //
+  void mousePressed() {
+    for (int i=0; i < fireworks.length; i++) {
+    fireworks[i] = new Fireworks ( mouseX, mouseY, fDiameter, fDiameter, colour );
+    println("click");
+  }
   }
   //
   void explosion() {
+    println("working");
     for (int i=0; i < fireworks.length; i++) {
-          fireworks[i] = new Fireworks ( x, y, ballDiameter, ballDiameter, c );
+      fireworks[i] = new Fireworks ( ballX, ballY, fDiameter, fDiameter, colour);
     }
   }
   //

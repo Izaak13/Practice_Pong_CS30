@@ -39,9 +39,9 @@ class Ball
     this.y = yParameter; //ERROR: trigger when ball enters goal
     this.colour = color ( random(255), random(255), random(255)) ;
     this.diameter = random(width*1/25);
-    this.xSpeed = random(-5, 5);
-    this.ySpeed = random(-5, 5);
-    gravity = gravityParameter; //gloabl variable = local variable
+    this.xSpeed = random(-width/200, width/200);
+    this.ySpeed = random(-width/200, width/200);
+    gravity = width/1000; //gloabl variable = local variable
     
   } //End firework
   //
@@ -67,21 +67,22 @@ class Ball
   } //End movedBall constructor
   //
   float xDirection() {
-    float xDirection = int ( random(-6, 6) );
-    while (xDirection > -3 && xDirection < 3) {
-      xDirection = int ( random(-6, 6) ); //variable must be populated first
+    float xDirection = int ( random(-width/100, width/100) );
+    while (xDirection > -width/130 && xDirection < width/130) {
+      xDirection = int ( random(-width/100, width/100) ); //variable must be populated first
     }
     return xDirection;
   }
   float yDirection() {
-    float yDirection = int ( random(-6, 6) );
-    while (yDirection > -3 && yDirection < 3) {
-      yDirection = int ( random(-6, 6) ); //variable must be populated first
+    float yDirection = int ( random(-width/120, width/120) );
+    while (yDirection > -width/150 && yDirection < width/150) {
+      yDirection = int ( random(-width/120, width/120) ); //variable must be populated first
     }
     return yDirection;  
   }
   void draw() { //ball, different draw function than the main program
     fill(colour); //caution: must reset defaults
+    strokeWeight(2);
     ellipse(x, y, diameter, diameter); //Easter egg: at bounce, diameters changes
     fill(0);
     //
@@ -92,24 +93,45 @@ class Ball
     x += xSpeed * xSpeedChange; //x = x + xSpeed
     y += ySpeed * ySpeedChange;
   } //End step
+  //
   void bounce(float topParameter, float bottomParameter) {
     if ( x < 0+(diameter*1/2) || x > width-(diameter*1/2) ) xSpeed *= xDirection; //Repetition is *-1
     if ( y < topParameter+(diameter*1/2) || y > bottomParameter-(diameter*1/2)) ySpeed *= yDirection; //Repetition is *-1
     //paddle horizontal bounce code
-    if (x < width*1/2) {
+    if (x < width*1/2 && xSpeed < 0) {
       if ( y < (myPaddle.paddleY+myPaddle.paddleHeight) & y > myPaddle.paddleY & x <= (myPaddle.paddleX+myPaddle.paddleWidth+diameter*1/2) & x >= (myPaddle.paddleX-diameter*1/2)) xSpeed *= xDirection;
     }
-    if (x > width*1/2) {
+    if (x > width*1/2 && xSpeed > 0) {
       if ( y < (yourPaddle.paddleY+yourPaddle.paddleHeight) & y > yourPaddle.paddleY & x >= (yourPaddle.paddleX-diameter*1/2) & x <= (yourPaddle.paddleX+yourPaddle.paddleWidth+diameter*1/2) ) xSpeed *= xDirection;
     }
     //paddle vertical bounce code
+    /*
     if (x < width*1/2) {
       if ( y < (myPaddle.paddleY+myPaddle.paddleHeight+diameter*1/2) & y > myPaddle.paddleY-(diameter*1/2) & x >= myPaddle.paddleX & x <= (myPaddle.paddleX+myPaddle.paddleWidth) ) ySpeed *= yDirection;
     }
     if (x > width*1/2) {
       if ( y < (yourPaddle.paddleY+yourPaddle.paddleHeight+diameter*1/2) & y > yourPaddle.paddleY-(diameter*1/2) & x >= yourPaddle.paddleX & x <= (yourPaddle.paddleX+yourPaddle.paddleWidth) ) ySpeed *= yDirection;
     }
+    */
   }//End bounce
+  //
+  void explosionTrigger() {
+    if ((x < (2*diameter) || x > ( width-(2*diameter)))) {
+    if (explosion==true) {
+      if (x < (2*diameter) || x > ( width-(2*diameter)) ) {
+        netExplosion(x, y);
+      }
+      if (x < (2*diameter)) playerTwoScore++;
+      if (x > ( width-(2*diameter))) playerOneScore++;
+    }
+      explosion=false;
+    //
+    } //Goal, firework constructor execution, based on x-value
+    else 
+    {
+      explosion=true;
+    }
+  }//end explosion
   //
   /*
   void tableYUpdate( float tableYParameter, float tableHeightParameter, float tableWidthParameter, float tableXParameter, float myPaddleXParameter, float yourPaddleXParameter, float myPaddleYParameter, float yourPaddleYParameter, float paddleWidthParameter, float myPaddleHeightParameter, float yourPaddleHeightParameter ) {

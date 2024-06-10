@@ -2,7 +2,7 @@
 //Global Variables 
 ArrayList<Shape> shapes = new ArrayList<Shape>();
 ArrayList<Ball> ball = new ArrayList<Ball>();
-float lPaddleTop, rPaddleTop;
+float lPaddleTop, rPaddleTop, ballX, ballY, ballDiameter;
 //
 void setup() {
   fullScreen();
@@ -65,6 +65,9 @@ void draw() {
 }//end draw
 //
 void mousePressed() {
+  for (Shape s : shapes) {
+    s.mousePressed();
+  }
 }//end mousePressed
 //
 void keyPressed() {

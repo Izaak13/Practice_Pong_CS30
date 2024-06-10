@@ -5,7 +5,7 @@ class Ball extends Circle {
   float diameter;
   int xSpeed = 10;
   int ySpeed = 10;
-  boolean explosionActivate;
+  boolean explosionActivate = true;
   int playerOneScore, playerTwoScore;
   Fireworks fireworks;
   //
@@ -35,6 +35,11 @@ class Ball extends Circle {
       if ( y < (rPaddleTop+paddleHeight) && y > rPaddleTop && x >= er-w/2 && x <= er+this.w ) xSpeed *= -1;
     }
     println();
+    explosionTrigger();
+    //
+    for (Shape s : shapes) {
+        s.ballUpdate(x, y, w);
+    }
     //
     /*
     if ( s==false && ( x>el && x<er ) ) { //Logical Short Circuit Boolean, !=

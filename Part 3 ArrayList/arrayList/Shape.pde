@@ -34,9 +34,16 @@ abstract class Shape {
   //
   void keyReleased() {}//end keyReleased
   //
+  void mousePressed() {}//end mousePressed
+  //
   void paddleUpdate(float lPaddleTopParameter, float rPaddleTopParameter) {
     lPaddleTop = lPaddleTopParameter;
     rPaddleTop = rPaddleTopParameter;
+  }//end paddleUpdate
+  void ballUpdate(float ballXParameter, float ballYParameter, float ballDiameterParameter) {
+    ballX = ballXParameter;
+    ballY = ballYParameter;
+    ballDiameter = ballDiameterParameter;
   }//end paddleUpdate
   void explosion(){
   }

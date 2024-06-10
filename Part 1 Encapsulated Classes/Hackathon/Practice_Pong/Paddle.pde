@@ -30,7 +30,7 @@ class Paddle {
   this.paddleHeight = tableHeight*paddleStartHeight; //color(int(random()), int(random()), int(random())
   this.paddleY = tableY + (tableHeight * 1/2) - ( paddleHeight*1/2 );
   this.paddleColour = color ( random(255), random(255), random(255)); //greyscale
-  paddleMove =5; //easter egg, paddle speed is 1 pixel but can change
+  paddleMove = height/150; //easter egg, paddle speed is 1 pixel but can change
   } //end paddle constructor
   //
   //Pong Table Constructor
@@ -58,7 +58,7 @@ class Paddle {
     stroke(255);
     fill(#234ECB);
     rect(tableX, tableY, tableWidth, tableHeight); //need lines for design
-    strokeWeight(2);
+    strokeWeight(7);
     ellipse(tableX+width/2, tableY+tableHeight/2, tableHeight/2, tableHeight/2);
     line(tableX+width/2, tableY, tableX+width/2, tableHeight*1.125);
     line(tableX+(myBall.diameter*3), tableY, tableX+(myBall.diameter*3), tableHeight*1.125);
@@ -73,15 +73,17 @@ class Paddle {
     rect(width*14/15-width/6, height/60, width/6, height/15); //player 2
     rect(width/4, height/60, width/12, height/15); //player 1 score
     rect(width*3/4-width/12, height/60, width/12, height/15); //player 2 score
-    rect(width*2.5/6, height/60, width/6, height/15); //best of selector
+    rect(width*2.5/6, height/60, width/6, height/15); //Title
     //
     rect(width/10, height*59/60-height/15, width/6, height/15); //opponent selector
-    rect(width*4.5/10, height*59/60-height/15, width/10, height/15); //pause game
+    rect(width*4.5/10, height*59/60-height/15, width/10, height/15); //reset
     rect(width*9/10-width/6, height*59/60-height/15, width/6, height/15); //quit
   }//end buttons
   //draw paddles
   void paddles() {
+    strokeWeight(2);
     rect(paddleX, paddleY, paddleWidth, paddleHeight);
+    strokeWeight(1);
   } //End paddles
   //
   void movePaddleDown() {

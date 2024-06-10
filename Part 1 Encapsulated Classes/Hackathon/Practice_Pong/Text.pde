@@ -1,4 +1,4 @@
-PFont font;
+PFont font, boldFont;
 color white=#FFFFFF, gray=#747473, black=#0A0A0A;//not night mode friendly
 //
 void textSetup() {
@@ -7,6 +7,7 @@ void textSetup() {
   printArray(fontList); //For listing all possible fonts to choos, then createFont
   //
   font = createFont ("Comic Sans MS", 100); //Verify font exists
+  boldFont = createFont ("Impact", 100);
   //Tools create Font / find font / DO NOT PRESS "OK", known bug
   //
 }//End text setup

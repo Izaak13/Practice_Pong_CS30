@@ -8,9 +8,11 @@ boolean speedActive = true;
 boolean explosion = true;
 float gravity=0.5;
 int playerOneScore=0, playerTwoScore=0;
+int opponentSelect;
 //
 void setup() {
-  size(700, 400); //fullscreen(); displayWidth; displayHeight
+  //size(700, 400); //fullscreen(); displayWidth; displayHeight
+  fullScreen();
   //ScreenSizeChecker for landscape, portrait, square views
   //Updated automatically for screen rotation on android
   // Population
@@ -48,11 +50,13 @@ void draw() {
   //
   myBall.bounce(myPaddle.tableY, myPaddle.tableBottom);
   movedBall.bounce(myPaddle.tableY, myPaddle.tableBottom);
+  myBall.explosionTrigger();
   //
   //myBall.tableYUpdate(myPaddle.tableX, myPaddle.tableY, myPaddle.tableWidth, myPaddle.tableHeight, myPaddle.paddleX, yourPaddle.paddleX, myPaddle.paddleY, yourPaddle.paddleY, myPaddle.paddleWidth, myPaddle.paddleHeight, yourPaddle.paddleHeight);
   //movedBall.tableYUpdate(myPaddle.tableX, myPaddle.tableY, myPaddle.tableWidth, myPaddle.tableHeight, myPaddle.paddleX, yourPaddle.paddleX, myPaddle.paddleY, yourPaddle.paddleY, myPaddle.paddleWidth, myPaddle.paddleHeight, yourPaddle.paddleHeight);
   //Trigger: left goal, right goal
   //ERROR: ball instance still bounces
+  /*
 if ((myBall.x < (2*myBall.diameter) || myBall.x > ( width-(2*myBall.diameter)) || movedBall.x < (2*movedBall.diameter) || movedBall.x > ( width-(2*movedBall.diameter)))) {
     if (explosion==true) {
     if (myBall.x < (2*myBall.diameter) || myBall.x > ( width-(2*myBall.diameter)) ) netExplosion(myBall.x, myBall.y);
@@ -65,7 +69,7 @@ if ((myBall.x < (2*myBall.diameter) || myBall.x > ( width-(2*myBall.diameter)) |
   else 
   {
   explosion=true;
-  }
+  }*/
   //
   for (int i=0; i < fireworks.length; i++) {
     fireworks[i].draw();
@@ -76,6 +80,13 @@ if ((myBall.x < (2*myBall.diameter) || myBall.x > ( width-(2*myBall.diameter)) |
   textDraw(black, CENTER, TOP, font, "QUIT", width*9/10-width/6, height*59/60-height/15, width/6, height/15);
   textDraw(black, CENTER, TOP, font, String.valueOf(playerOneScore), width/4, height/60, width/12, height/15);
   textDraw(black, CENTER, TOP, font, String.valueOf(playerTwoScore), width*3/4-width/12, height/60, width/12, height/15);
+  textDraw(black, CENTER, CENTER, boldFont, "PONG", width*2.5/6, height/60, width/6, height/15);
+  textDraw(black, CENTER, TOP, font, "Player 1", width/15, height/60, width/6, height/15);
+  textDraw(black, CENTER, TOP, font, "Player 2", width*14/15-width/6, height/60, width/6, height/15);
+  textDraw(black, CENTER, TOP, font, "RESET", width*4.5/10, height*59/60-height/15, width/10, height/15);
+  //
+  if (opponentSelect < 3) {
+  }
   //
 } //end draw
 //
@@ -122,13 +133,21 @@ void mousePressed() {
   starsMousePressed();
   if (mouseY > myPaddle.tableY && mouseY < (myPaddle.tableY+myPaddle.tableHeight)) {
   for (int i=0; i < fireworks.length; i++) {
-    fireworks[i] = new Ball(mouseX, mouseY, 0.5);
+    fireworks[i] = new Ball(-300, 900, 0.5);
   }
-  movedBall = new Ball(mouseX, mouseY, myBall.diameter, myBall.colour, myBall.xSpeed, myBall.ySpeed);
+  myBall = new Ball(mouseX, mouseY, myBall.diameter, myBall.colour, myBall.xSpeed, myBall.ySpeed);
   }
   //
   //button clicking
   if (mouseX >= (width*9/10-width/6) && mouseX <= (width*9/10) && mouseY >= (height*59/60-height/15) && mouseY <= height*59/60) System. exit(0); //quit
+  if (mouseX >= (width*4.5/10) && mouseX <= (width*4.5/10+width/10) && mouseY >= (height*59/60-height/15) && mouseY <= height*59/60) { //Reset
+    myBall = new Ball(width/2, height/2, myBall.diameter, myBall.colour, myBall.xSpeed, myBall.ySpeed);
+    playerTwoScore = 0;
+    playerOneScore = 0;
+  }
+  if (mouseX >= (width*9/10-width/6) && mouseX <= (width*9/10) && mouseY >= (height*59/60-height/15) && mouseY <= height*59/60) { //Opponent selector
+    opponentSelect++;
+  }
 } //end mousePressed
 //
 void ballCollisions() {
